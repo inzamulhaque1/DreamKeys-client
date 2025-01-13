@@ -3,8 +3,10 @@ import { app } from "../firebase/firebase.config";
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -16,7 +18,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const googleProvider = new GoogleAuthProvider();
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password).then(
@@ -29,15 +31,33 @@ const AuthProvider = ({ children }) => {
   };
 
   const updateUserProfile = (user, name, photo) => {
+    setLoading(true);
     return updateProfile(user, {
       displayName: name,
       photoURL: photo,
-    });
+    })
+      .then(() => {
+        // Reload the user to fetch updated info
+        return user.reload().then(() => {
+          setUser(auth.currentUser); // Update global state
+          setLoading(false);
+        });
+      })
+      .catch((error) => {
+        console.error("Error updating profile:", error);
+        setLoading(false);
+        throw error;
+      });
   };
 
   const signIn = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const googleSignIn = () => {
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
   };
 
   useState(() => {
@@ -74,7 +94,8 @@ const AuthProvider = ({ children }) => {
     user,
     updateUserProfile,
     signIn,
-    logOut
+    logOut,
+    googleSignIn
   };
 
   return (
