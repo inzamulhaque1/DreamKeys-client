@@ -5,7 +5,12 @@ const Navbar = () => {
     <>
       <li className="text-black">
         <Link to={'/'}>Home</Link>
- 
+      </li>
+      <li className="text-black">
+        <Link to={'/login'}>Login</Link>
+      </li>
+      <li className="text-black">
+        <Link to={'/sign-up'}>Sign Up</Link>
       </li>
       
     </> )
@@ -38,7 +43,7 @@ const Navbar = () => {
 
             </ul>
           </div>
-          <Link to='/' className=" text-xl">daisyUI</Link>
+          <Link to='/' className=" text-xl">DreamKeys</Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
