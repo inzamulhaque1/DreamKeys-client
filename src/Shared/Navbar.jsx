@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 const Navbar = () => {
+
+  const { user, logOut } = useAuth();
+  console.log(user);
 
   const links = (
     <>
@@ -51,18 +55,32 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle avatar"
-          >
-            <div className="w-10 rounded-full">
-              <img
-                alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
+        {!user ? (
+             
+             <>
+             </>
+           ) : (
+             <div className="flex justify-center items-center gap-4 font-bold">
+             <p>
+               <span>{user.displayName}</span>
+             </p>
+           <button className="btn bg-lime-500 btn-sm mr-5" onClick={logOut}>
+             Sign Out
+           </button> </div>
+         )}
+        {user && (
+            <div className="avatar online">
+              <div className="h-12 w-12 rounded-full">
+                <img
+                  src={
+                    user.photoURL ||
+                    "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  }
+                  alt="User Avatar"
+                />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
