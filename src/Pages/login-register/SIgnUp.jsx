@@ -5,17 +5,21 @@ import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import SocialLogin from "./SocialLogin";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+
 
 const apiKey = import.meta.env.VITE_IMGBB_API_KEY;
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { createUser, updateUserProfile } = useAuth();
+  const { createUser,setUser, updateUserProfile } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const [error, setError] = useState("");
+  const axiosPublic = useAxiosPublic()
 
+  
   const handleRegister = (e) => {
     e.preventDefault();
     setError(""); // Clear previous errors
@@ -24,7 +28,7 @@ const SignUp = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const photoFile = e.target.photo.files[0];
-  
+    
     
   
     if (password.length < 6 || !/[A-Z]/.test(password) || !/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
@@ -49,7 +53,25 @@ const SignUp = () => {
         createUser(email, password)
           .then((result) => {
             const user = result.user;
-            return updateUserProfile(user, name, photoURL);
+            updateUserProfile(user, name, photoURL)
+            .then(() => {
+              const userInfo = {
+                name: name,
+                email: email,
+              };
+              axiosPublic.post("users", userInfo).then((res) => {
+                if (res.data && res.data.insertedId) { // Ensure the response contains insertedId
+                  console.log(res.data.insertedId, 'user added to database');
+                  user.reload().then(() => {
+                    setUser(user); // Update user state with the latest user object
+                  });
+                  navigate(from, { replace: true });
+                } else {
+                  console.error("User not added to database:", res.data);
+                }
+              });
+            })
+
           })
           .then(() => navigate(from, { replace: true }))
           .catch((err) => {
