@@ -1,23 +1,19 @@
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 const Navbar = () => {
-
   const { user, logOut } = useAuth();
   console.log(user);
 
   const links = (
     <>
       <li className="text-black">
-        <Link to={'/'}>Home</Link>
+        <Link to={"/"}>Home</Link>
       </li>
       <li className="text-black">
-        <Link to={'/login'}>Login</Link>
+        <Link to={"dashboard"}>Dashboard</Link>
       </li>
-      <li className="text-black">
-        <Link to={'/sign-up'}>Sign Up</Link>
-      </li>
-      
-    </> )
+    </>
+  );
 
   return (
     <div className="bg-base-300">
@@ -43,32 +39,39 @@ const Navbar = () => {
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-            > {links}
-
+            >
+              {" "}
+              {links}
             </ul>
           </div>
-          <Link to='/' className=" text-xl">DreamKeys</Link>
+          <Link to="/" className=" text-xl">
+            DreamKeys
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            {links}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
-        {!user ? (
-             
-             <>
-             </>
-           ) : (
-             <div className="flex justify-center items-center gap-4 font-bold">
-             <p>
-               <span>{user.displayName}</span>
-             </p>
-           <button className="btn bg-lime-500 btn-sm mr-5" onClick={logOut}>
-             Sign Out
-           </button> </div>
-         )}
-        {user && (
+          {!user ? (
+            <>
+              <p className="text-black mr-6">
+                <Link to={"/login"}>Login</Link>
+              </p>
+              <p className="text-black">
+                <Link to={"/sign-up"}>Sign Up</Link>
+              </p>
+            </>
+          ) : (
+            <div className="flex justify-center items-center gap-4 font-bold">
+              <p>
+                <span>{user.displayName}</span>
+              </p>
+              <button className="btn bg-lime-500 btn-sm mr-5" onClick={logOut}>
+                Sign Out
+              </button>{" "}
+            </div>
+          )}
+          {user && (
             <div className="avatar online">
               <div className="h-12 w-12 rounded-full">
                 <img
