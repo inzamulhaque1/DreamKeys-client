@@ -8,10 +8,12 @@ const SocialLogin = () => {
   const navigate = useNavigate();
 
   const handleGoogleSignIn = () => {
+
     googleSignIn().then((result) => {
       const userInfo = {
         name: result.user?.displayName,
         email: result.user?.email,
+        photoURL: result.user?.photoURL,
       };
 
 

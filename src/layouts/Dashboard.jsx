@@ -189,7 +189,7 @@ const Dashboard = () => {
                         <FaUser className="text-lg" />
                       )}
                     </NavLink>
-                    
+
                     <NavLink
                       to={"manage-reviews"}
                       className={({ isActive }) =>
@@ -214,7 +214,23 @@ const Dashboard = () => {
                 {userRole === "agent" && (
                   <>
                     <NavLink
-                      to={"all-users"}
+                      to={"agent-profile"}
+                      className={({ isActive }) =>
+                        `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
+                          isActive
+                            ? "text-white font-bold border-white border-2 bg-red-500"
+                            : "text-white"
+                        }`
+                      }
+                    >
+                      {isSidebarOpen ? (
+                        <span className="ml-2">Agent Profile</span>
+                      ) : (
+                        <FaUser className="text-lg" />
+                      )}
+                    </NavLink>
+                    <NavLink
+                      to={"add-property"}
                       className={({ isActive }) =>
                         `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
                           isActive
@@ -228,7 +244,23 @@ const Dashboard = () => {
                       ) : (
                         <FaUser className="text-lg" />
                       )}
-                    </NavLink>{" "}
+                    </NavLink>
+                    <NavLink
+                      to={"my-added-property"}
+                      className={({ isActive }) =>
+                        `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
+                          isActive
+                            ? "text-white font-bold border-white border-2 bg-red-500"
+                            : "text-white"
+                        }`
+                      }
+                    >
+                      {isSidebarOpen ? (
+                        <span className="ml-2">My Added Property</span>
+                      ) : (
+                        <FaUser className="text-lg" />
+                      )}
+                    </NavLink>
                   </>
                 )}
 
