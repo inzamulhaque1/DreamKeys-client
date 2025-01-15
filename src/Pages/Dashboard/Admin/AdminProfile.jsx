@@ -1,6 +1,6 @@
 import useAuth from "../../../hooks/useAuth";
 
-const MyProfile = () => {
+const AdminProfile = () => {
   const { user } = useAuth();
 
   // Format date to local time
@@ -18,11 +18,10 @@ const MyProfile = () => {
 
   const userInfo = {
     email: user?.email || "N/A",
-    role: user?.role || 'User',
+    role: user?.role || 'admin',
     joinedDate: formatDateToLocalTime(user?.metadata?.creationTime),
     lastLogin: formatDateToLocalTime(user?.metadata?.lastSignInTime),
   };
-
   return (
     <div
       className="relative h-full bg-cover bg-center text-white"
@@ -62,7 +61,7 @@ const MyProfile = () => {
             </h2>
             <p className="text-sm text-gray-300">{userInfo.email}</p>
             {userInfo.role && (
-              <span className="inline-block mt-2 px-4 py-1 text-sm font-medium text-white bg-purple-600 rounded-full shadow-md">
+              <span className="inline-block mt-2 px-4 py-1 text-sm font-medium text-white bg-green-600 rounded-full shadow-md">
                 {userInfo.role}
               </span>
             )}
@@ -75,6 +74,9 @@ const MyProfile = () => {
             </h3>
             <ul className="mt-3 space-y-2">
               <li>
+                <strong>Role:</strong> {userInfo.role}
+              </li>
+              <li>
                 <strong>Joined Date:</strong> {userInfo.joinedDate}
               </li>
               <li>
@@ -83,16 +85,12 @@ const MyProfile = () => {
             </ul>
           </div>
 
-          {/* Actions */}
-          <div className="flex justify-center mt-6">
-            <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full shadow-md transition-transform transform hover:scale-105">
-              Logout
-            </button>
-          </div>
+          
+       
         </div>
       </div>
     </div>
   );
 };
 
-export default MyProfile;
+export default AdminProfile;

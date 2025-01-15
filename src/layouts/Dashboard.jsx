@@ -155,6 +155,58 @@ const Dashboard = () => {
                         <FaUser className="text-lg" />
                       )}
                     </NavLink>
+
+                    <NavLink
+                      to={"admin-profile"}
+                      className={({ isActive }) =>
+                        `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
+                          isActive
+                            ? "text-white font-bold border-white border-2 bg-red-500"
+                            : "text-white"
+                        }`
+                      }
+                    >
+                      {isSidebarOpen ? (
+                        <span className="ml-2">Admin Profile</span>
+                      ) : (
+                        <FaUser className="text-lg" />
+                      )}
+                    </NavLink>
+
+                    <NavLink
+                      to={"manage-properties"}
+                      className={({ isActive }) =>
+                        `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
+                          isActive
+                            ? "text-white font-bold border-white border-2 bg-red-500"
+                            : "text-white"
+                        }`
+                      }
+                    >
+                      {isSidebarOpen ? (
+                        <span className="ml-2">Manage Properties</span>
+                      ) : (
+                        <FaUser className="text-lg" />
+                      )}
+                    </NavLink>
+                    
+                    <NavLink
+                      to={"manage-reviews"}
+                      className={({ isActive }) =>
+                        `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
+                          isActive
+                            ? "text-white font-bold border-white border-2 bg-red-500"
+                            : "text-white"
+                        }`
+                      }
+                    >
+                      {isSidebarOpen ? (
+                        <span className="ml-2">Manage Reviews</span>
+                      ) : (
+                        <FaUser className="text-lg" />
+                      )}
+                    </NavLink>
+                    
                   </>
                 )}
 

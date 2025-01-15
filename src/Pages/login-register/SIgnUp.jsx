@@ -58,6 +58,7 @@ const SignUp = () => {
               const userInfo = {
                 name: name,
                 email: email,
+                photoURL: photoURL
               };
               axiosPublic.post("users", userInfo).then((res) => {
                 if (res.data && res.data.insertedId) { // Ensure the response contains insertedId

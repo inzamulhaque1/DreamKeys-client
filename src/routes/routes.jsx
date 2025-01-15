@@ -9,6 +9,9 @@ import MyReviews from "../Pages/Dashboard/User/MyReviews";
 import PropertyBought from "../Pages/Dashboard/User/PropertyBought";
 import Wishlist from "../Pages/Dashboard/User/Wishlist";
 import AllUsers from "../Pages/Dashboard/Admin/Allusers";
+import AdminProfile from "../Pages/Dashboard/Admin/AdminProfile";
+import ManageProperties from "../Pages/Dashboard/Admin/ManageProperties";
+import ManageReviews from "../Pages/Dashboard/Admin/ManageReviews";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +41,18 @@ const router = createBrowserRouter([
       {
         path: 'all-users',
         element:<AllUsers></AllUsers>
+      },
+      {
+        path: 'admin-profile',
+        element:<AdminProfile></AdminProfile>
+      },
+      {
+        path: 'manage-properties',
+        element: <ManageProperties></ManageProperties>
+      },
+      {
+        path: 'manage-reviews',
+        element:<ManageReviews></ManageReviews>
       },
       // Users
       {
