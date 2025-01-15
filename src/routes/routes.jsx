@@ -8,6 +8,7 @@ import MyProfile from "../Pages/Dashboard/User/MyProfile";
 import MyReviews from "../Pages/Dashboard/User/MyReviews";
 import PropertyBought from "../Pages/Dashboard/User/PropertyBought";
 import Wishlist from "../Pages/Dashboard/User/Wishlist";
+import AllUsers from "../Pages/Dashboard/Admin/Allusers";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,11 @@ const router = createBrowserRouter([
     element: <Dashboard></Dashboard>,
     children: [
 
+      // Admin
+      {
+        path: 'all-users',
+        element:<AllUsers></AllUsers>
+      },
       // Users
       {
         path: 'my-profile',

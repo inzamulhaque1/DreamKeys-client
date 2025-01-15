@@ -9,24 +9,45 @@ import { FaHeart, FaUser } from "react-icons/fa";
 import { SiBookmyshow } from "react-icons/si";
 import { MdOutlineReviews } from "react-icons/md";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+
+
 
 const Dashboard = () => {
   const { user, logOut } = useAuth();
   const [greeting, setGreeting] = useState("");
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [userRole, setUserRole] = useState(null);
+  const axiosPublic = useAxiosPublic()
+
+
+  useEffect(() => {
+    if (user && user.email) { // Ensure `user` is not null
+      const userEmail = user.email;
+      axiosPublic
+        .get("/users/role", { params: { email: userEmail } })
+        .then((response) => {
+          setUserRole(response.data.role); // Update the state with the role
+          console.log("User Role:", response.data.role);
+        })
+        .catch((error) => console.error("Error fetching user role:", error));
+    }
+  }, [axiosPublic, user]);
+  
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  
+
+  const signOut = () => {
+    logOut();
+    navigate("/");
+  };
 
 
-  const signOut =()=>{
-    logOut()
-    navigate('/')
-
-  }
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -113,97 +134,139 @@ const Dashboard = () => {
             {/* Sidebar Content */}
 
             <div className="mt-4 p-4">
-
-
               <ul>
+                {/* Admin Buttons */}
 
-                {/* USER */}
+                {userRole === "admin" && (
+                  <>
+                    <NavLink
+                      to={"all-users"}
+                      className={({ isActive }) =>
+                        `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
+                          isActive
+                            ? "text-white font-bold border-white border-2 bg-red-500"
+                            : "text-white"
+                        }`
+                      }
+                    >
+                      {isSidebarOpen ? (
+                        <span className="ml-2">All Users</span>
+                      ) : (
+                        <FaUser className="text-lg" />
+                      )}
+                    </NavLink>
+                  </>
+                )}
 
-                <NavLink
-                  to={"my-profile"}
-                  className={({ isActive }) =>
-                    `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
-                      isActive
-                        ? "text-white font-bold border-white border-2 bg-red-500"
-                        : "text-white"
-                    }`
-                  }
-                >
-                  {isSidebarOpen ? (
-                    <span className="ml-2">My Profile</span>
-                  ) : (
-                    <FaUser className="text-lg" />
-                  )}
-                </NavLink>
+                {/* Agent Buttons */}
+                {userRole === "agent" && (
+                  <>
+                    <NavLink
+                      to={"all-users"}
+                      className={({ isActive }) =>
+                        `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
+                          isActive
+                            ? "text-white font-bold border-white border-2 bg-red-500"
+                            : "text-white"
+                        }`
+                      }
+                    >
+                      {isSidebarOpen ? (
+                        <span className="ml-2">Add Property</span>
+                      ) : (
+                        <FaUser className="text-lg" />
+                      )}
+                    </NavLink>{" "}
+                  </>
+                )}
 
-                <NavLink
-                  to={"wishlist"}
-                  className={({ isActive }) =>
-                    `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
-                      isActive
-                        ? "text-white font-bold border-white border-2 bg-red-500"
-                        : "text-white"
-                    }`
-                  
-                  }
-                >
-                  {isSidebarOpen ? (
-                    <span className="ml-2">Wishlist</span>
-                  ) : (
-                    <FaHeart className="text-lg" />
-                  )}
-                </NavLink>
-
-                <NavLink
-                  to={"property-bought"}
-                  className={({ isActive }) =>
-                    `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
-                      isActive
-                        ? "text-white font-bold border-white border-2 bg-red-500"
-                        : "text-white"
-                    }`
-                  
-                  }
-                >
-                  {isSidebarOpen ? (
-                    <span className="ml-2">Property bought</span>
-                  ) : (
-                    <SiBookmyshow className="text-lg" />
-                  )}
-                </NavLink>
-
-                <NavLink
-                  to={"my-reviews"}
-                  className={({ isActive }) =>
-                    `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
-                      isActive
-                        ? "text-white font-bold border-white border-2 bg-red-500"
-                        : "text-white"
-                    }`
-                  
-                  }
-                >
-                  {isSidebarOpen ? (
-                    <span className="ml-2">My reviews</span>
-                  ) : (
-                    <MdOutlineReviews className="text-lg" />
-                  )}
-                </NavLink>
-
+                {/* User Buttons */}
+                {userRole === "user" && (
+                  <>
+                    <NavLink
+                      to={"my-profile"}
+                      className={({ isActive }) =>
+                        `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
+                          isActive
+                            ? "text-white font-bold border-white border-2 bg-red-500"
+                            : "text-white"
+                        }`
+                      }
+                    >
+                      {isSidebarOpen ? (
+                        <span className="ml-2">My Profile</span>
+                      ) : (
+                        <FaUser className="text-lg" />
+                      )}
+                    </NavLink>
+                    <NavLink
+                      to={"wishlist"}
+                      className={({ isActive }) =>
+                        `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
+                          isActive
+                            ? "text-white font-bold border-white border-2 bg-red-500"
+                            : "text-white"
+                        }`
+                      }
+                    >
+                      {isSidebarOpen ? (
+                        <span className="ml-2">Wishlist</span>
+                      ) : (
+                        <FaHeart className="text-lg" />
+                      )}
+                    </NavLink>
+                    <NavLink
+                      to={"property-bought"}
+                      className={({ isActive }) =>
+                        `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
+                          isActive
+                            ? "text-white font-bold border-white border-2 bg-red-500"
+                            : "text-white"
+                        }`
+                      }
+                    >
+                      {isSidebarOpen ? (
+                        <span className="ml-2">Property bought</span>
+                      ) : (
+                        <SiBookmyshow className="text-lg" />
+                      )}
+                    </NavLink>
+                    <NavLink
+                      to={"my-reviews"}
+                      className={({ isActive }) =>
+                        `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
+                          isActive
+                            ? "text-white font-bold border-white border-2 bg-red-500"
+                            : "text-white"
+                        }`
+                      }
+                    >
+                      {isSidebarOpen ? (
+                        <span className="ml-2">My reviews</span>
+                      ) : (
+                        <MdOutlineReviews className="text-lg" />
+                      )}
+                    </NavLink>{" "}
+                  </>
+                )}
               </ul>
             </div>
           </div>
 
           {/* Bottom Section */}
-          <div className="p-4"  >
-            {isSidebarOpen ? 
-              <button onClick={signOut} className="bg-red-500 hover:bg-red-600 w-full p-2 rounded text-center">
+          <div className="p-4">
+            {isSidebarOpen ? (
+              <button
+                onClick={signOut}
+                className="bg-red-500 hover:bg-red-600 w-full p-2 rounded text-center"
+              >
                 Logout
-              </button> : <div className="mt-4">
+              </button>
+            ) : (
+              <div className="mt-4">
                 <IoLogOut onClick={signOut} className="text-4xl" />
               </div>
-            }
-
+            )}
           </div>
         </div>
 
