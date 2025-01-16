@@ -1,15 +1,52 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import { useEffect, useState } from "react";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const [userRole, setUserRole] = useState(""); // To store the user role
+  const axiosSecure = useAxiosSecure(); // Custom Axios hook
+  const navigate = useNavigate();
 
+
+  // Fetch the user role from the backend
+  useEffect(() => {
+    if (!user) {
+      return; // Exit if user is null
+    }
+  
+    const userEmail = user.email;
+    console.log(user.photoURL);
+  
+    axiosSecure.get(`/users?email=${userEmail}`).then((response) => {
+      const users = response.data; // Expecting an array
+      const currentUser = users.find((u) => u.email === userEmail);
+      setUserRole(currentUser?.role || "user");
+    });
+  }, [axiosSecure, user]);
+  
+  
+
+  // Handle dashboard navigation
+  const handleDashboardClick = () => {
+    if (userRole === "admin") {
+      navigate("/dashboard/admin-profile");
+    } else if (userRole === "agent") {
+      navigate("/dashboard/agent-profile");
+    } else {
+      navigate("/dashboard/my-profile");
+    }
+  };
   const links = (
     <>
       <li className="text-black">
         <Link to={"/"}>Home</Link>
       </li>
       <li className="text-black">
-        <Link to={"dashboard"}>Dashboard</Link>
+        <Link  to={'all-properties'}>All Properties</Link>
+      </li>
+      <li className="text-black">
+        <Link  onClick={handleDashboardClick}>Dashboard</Link>
       </li>
     </>
   );
@@ -78,7 +115,7 @@ const Navbar = () => {
                     user.photoURL ||
                     "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
                   }
-                  alt="User Avatar"
+                  alt="Avatar"
                 />
               </div>
             </div>

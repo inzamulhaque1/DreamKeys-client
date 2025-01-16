@@ -11,19 +11,17 @@ import { MdOutlineReviews } from "react-icons/md";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
-
-
 const Dashboard = () => {
   const { user, logOut } = useAuth();
   const [greeting, setGreeting] = useState("");
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [userRole, setUserRole] = useState(null);
-  const axiosPublic = useAxiosPublic()
-
+  const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
-    if (user && user.email) { // Ensure `user` is not null
+    if (user && user.email) {
+      // Ensure `user` is not null
       const userEmail = user.email;
       axiosPublic
         .get("/users/role", { params: { email: userEmail } })
@@ -34,20 +32,15 @@ const Dashboard = () => {
         .catch((error) => console.error("Error fetching user role:", error));
     }
   }, [axiosPublic, user]);
-  
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  
-
   const signOut = () => {
     logOut();
     navigate("/");
   };
-
-
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -206,7 +199,6 @@ const Dashboard = () => {
                         <FaUser className="text-lg" />
                       )}
                     </NavLink>
-                    
                   </>
                 )}
 
@@ -355,8 +347,8 @@ const Dashboard = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 bg-gray-100 ">
-          <Outlet></Outlet>
+        <div className="flex-1 bg-gray-100 overflow-y-auto h-full">
+          <Outlet />
         </div>
       </div>
     </div>
