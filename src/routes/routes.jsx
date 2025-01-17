@@ -17,6 +17,8 @@ import AddProperty from "../Pages/Dashboard/Agent/AddProperty";
 import MyAddedProperties from "../Pages/Dashboard/Agent/MyAddedProperties";
 import AllProperties from "../Pages/AllProperties";
 import PropertyDetails from "../Pages/PropertyDetails";
+import MakeOffer from "../Pages/Dashboard/User/MakeOffer";
+
 
 const router = createBrowserRouter([
   {
@@ -43,6 +45,7 @@ const router = createBrowserRouter([
         path: "sign-up",
         element: <SIgnUp></SIgnUp>,
       },
+
     ],
   },
   {
@@ -97,6 +100,11 @@ const router = createBrowserRouter([
         path: 'wishlist',
         element:<Wishlist></Wishlist>
       },
+      {
+        path: `make-offer/:id`,
+        element:<MakeOffer></MakeOffer>
+      },
+      
     ]
   },
 ]);

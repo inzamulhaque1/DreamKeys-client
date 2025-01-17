@@ -10,7 +10,6 @@ const PropertyDetails = () => {
   const [loading, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
 
-  console.log(id);
 
   useEffect(() => {
     // Fetch property details

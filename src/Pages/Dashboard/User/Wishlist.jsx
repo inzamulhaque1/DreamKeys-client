@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
+
 
 
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState([]);
   const [loading, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
-
   useEffect(() => {
     // Fetch all wishlist items
     axiosSecure
@@ -34,6 +35,8 @@ const Wishlist = () => {
   if (loading) {
     return <div>Loading wishlist...</div>;
   }
+
+
 
   return (
     <div className="p-8">
@@ -68,9 +71,10 @@ const Wishlist = () => {
               <p className="text-gray-600">
                 Price Range: ${item.priceRange.min} - ${item.priceRange.max}
               </p>
-              <button className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition mt-4">
+              <Link to={`/dashboard/make-offer/${item._id}`}><button  className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition mt-4">
                 Make an Offer
               </button>
+              </Link>
               <button
                 onClick={() => handleRemove(item._id)}
                 className="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition mt-4 ml-2"
