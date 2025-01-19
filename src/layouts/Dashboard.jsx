@@ -22,7 +22,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (user && user.email) {
       // Ensure `user` is not null
-      const userEmail = user.email;
+      const userEmail = user?.email;
       axiosPublic
         .get("/users/role", { params: { email: userEmail } })
         .then((response) => {
@@ -249,6 +249,22 @@ const Dashboard = () => {
                     >
                       {isSidebarOpen ? (
                         <span className="ml-2">My Added Property</span>
+                      ) : (
+                        <FaUser className="text-lg" />
+                      )}
+                    </NavLink>
+                    <NavLink
+                      to={"requested-property"}
+                      className={({ isActive }) =>
+                        `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
+                          isActive
+                            ? "text-white font-bold border-white border-2 bg-red-500"
+                            : "text-white"
+                        }`
+                      }
+                    >
+                      {isSidebarOpen ? (
+                        <span className="ml-2">Requested Property</span>
                       ) : (
                         <FaUser className="text-lg" />
                       )}

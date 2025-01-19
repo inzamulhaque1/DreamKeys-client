@@ -19,6 +19,7 @@ const MakeOffer = () => {
       .get(`/wishlist/${id}`)
       .then((response) => {
         setProperty(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error("Error fetching property details:", error);
@@ -42,7 +43,7 @@ const MakeOffer = () => {
     // Make an offer (you can send the offer data to your API here)
     axiosSecure
       .post("/bids", {
-        propertyId: id,
+        propertyId: property?.propertyId,
         offerAmount,
         agentEmail: property.agentEmail,
         buyerName: user?.displayName, 

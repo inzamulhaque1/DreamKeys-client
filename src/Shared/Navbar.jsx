@@ -16,7 +16,7 @@ const Navbar = () => {
     }
   
     const userEmail = user.email;
-    console.log(user.photoURL);
+
   
     axiosSecure.get(`/users?email=${userEmail}`).then((response) => {
       const users = response.data; // Expecting an array

@@ -2,62 +2,77 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 
-
 const PropertyBought = () => {
   const [bids, setBids] = useState(null);
-  const axiosSecure = useAxiosSecure()
-  const {user} = useAuth()
-
-
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
 
   // Fetch bids data
   useEffect(() => {
-    if (user){
+    if (user) {
       axiosSecure
-      .get(`/bids/${user?.email}`)
-      .then((response) => {
-        setBids(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching bids:", error);
-      })
-      
+        .get(`/bids/${user?.email}`)
+        .then((response) => {
+          setBids(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching bids:", error);
+        });
     }
+  }, [axiosSecure, user]);
 
-  }, [axiosSecure, user])
 
-  console.log(bids);
+  const getRibbonColor = (offerStatus) => {
+    const ribbonColors = {
+      verified: "text-green-500",
+      pending: "text-orange-500",
+      rejected: "text-red-500",
+    };
+    return ribbonColors[offerStatus] || "text-blue-500"; // Default color for unknown statuses
+  };
 
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Properties Bought</h1>
-        <table className="w-full table-auto border-collapse border border-gray-200">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border border-gray-300 px-4 py-2">Property Location</th>
-              <th className="border border-gray-300 px-4 py-2">Property Title</th>
-              <th className="border border-gray-300 px-4 py-2">Property Image</th>
-              <th className="border border-gray-300 px-4 py-2">Agent Name</th>
-              <th className="border border-gray-300 px-4 py-2">Offered Amount</th>
-              <th className="border border-gray-300 px-4 py-2">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bids?.map((bid, index) => (
-              <tr key={index}>
-                <td className="border border-gray-300 px-4 py-2">{bid?.location}</td>
-                <td className="border border-gray-300 px-4 py-2">{bid?.title}</td>
-                <td className="border border-gray-300 px-4 py-2">
-                  <img src={bid?.imageUrl} alt={bid?.title} className="h-16 w-16 object-cover" />
-                </td>
-                <td className="border border-gray-300 px-4 py-2">{bid?.agentName}</td>
-                <td className="border border-gray-300 px-4 py-2">${bid?.offerAmount}</td>
-                <td className="border border-gray-300 px-4 py-2">{bid?.offerStatus}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {bids?.map((bid, index) => (
+          <div
+            key={index}
+            className="bg-white shadow-md rounded-lg p-4 border border-gray-200"
+          >
+            <img
+              src={bid?.imageUrl}
+              alt={bid?.title}
+              className="h-40 w-full object-cover rounded-md mb-4"
+            />
+            <h2 className="text-lg font-semibold mb-2">{bid?.title}</h2>
+            <p className="text-sm font-semibold mb-2">
+                <span className="text-black font-bold">Status:</span>{" "}
+                <span
+                   className={`${getRibbonColor(
+                    bid?.offerStatus
+                  )} font-bold`}
+                >{bid?.offerStatus}
+                  
+                </span>
+              </p>
+            <p className="text-sm text-gray-600 mb-1">
+              <strong>Location:</strong> {bid?.location}
+            </p>
+            <p className="text-sm text-gray-600 mb-1">
+              <strong>Agent:</strong> {bid?.agentName}
+            </p>
+            <p className="text-sm text-gray-600 mb-1">
+              <strong>Offered Amount:</strong> ${bid?.offerAmount}
+            </p>
 
+            {
+              bid?.offerStatus === 'accepted' && <button className="btn btn-primary">PAY</button>
+            }
+            
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

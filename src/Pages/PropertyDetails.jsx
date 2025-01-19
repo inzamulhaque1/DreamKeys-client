@@ -6,7 +6,6 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 const PropertyDetails = () => {
   const { id } = useParams(); // Property ID from the route
   const [property, setProperty] = useState(null);
-  const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
 
@@ -24,16 +23,7 @@ const PropertyDetails = () => {
         
       });
 
-    // Fetch reviews for the property
-    axiosSecure
-      .get(`/properties/${id}/reviews`)
-      .then((response) => {
-        setReviews(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching reviews:", error);
-        
-      });
+
   }, [id, axiosSecure]);
 
   const handleAddToWishlist = () => {
@@ -48,21 +38,8 @@ const PropertyDetails = () => {
       });
   };
 
-  const handleAddReview = (reviewText) => {
-    axiosSecure
-      .post(`/properties/${id}/reviews`, { review: reviewText })
-      .then(() => {
-        
-        // Refresh reviews
-        return axiosSecure.get(`/properties/${id}/reviews`);
-      })
-      .then((response) => {
-        setReviews(response.data);
-      })
-      .catch((error) => {
-        console.error("Error adding review:", error);
-        
-      });
+  const handleAddReview = () => {
+
   };
 
   if (loading) {
@@ -96,25 +73,14 @@ const PropertyDetails = () => {
 
       {/* Reviews Section */}
       <div className="mt-8">
-        <h2 className="text-2xl font-bold mb-4">Reviews</h2>
-        {reviews.length === 0 ? (
-          <p>No reviews yet. Be the first to add one!</p>
-        ) : (
-          reviews.map((review, index) => (
-            <div key={index} className="border-b py-2">
-              <p className="text-gray-800">{review.text}</p>
-              <p className="text-sm text-gray-500">- {review.user}</p>
-            </div>
-          ))
-        )}
-        <button
-          onClick={() => handleAddReview("Your review text here")}
-          className="bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition mt-4"
-        >
-          Add a Review
-        </button>
+
       </div>
+
+      
     </div>
+
+
+
   );
 };
 
