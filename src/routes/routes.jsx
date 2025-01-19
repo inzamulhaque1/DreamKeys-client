@@ -19,6 +19,7 @@ import AllProperties from "../Pages/AllProperties";
 import PropertyDetails from "../Pages/PropertyDetails";
 import MakeOffer from "../Pages/Dashboard/User/MakeOffer";
 import RequestedProperties from "../Pages/Dashboard/Agent/RequestedProperties";
+import UpdateProperty from "../Pages/Dashboard/Agent/UpdateProperty";
 
 
 const router = createBrowserRouter([
@@ -84,6 +85,11 @@ const router = createBrowserRouter([
         path: 'my-added-property',
         element: <MyAddedProperties></MyAddedProperties>
       },
+      {
+        path: 'update-property/:id',
+        element: <UpdateProperty></UpdateProperty>
+      },
+
       {
         path: 'requested-property',
         element: <RequestedProperties></RequestedProperties>

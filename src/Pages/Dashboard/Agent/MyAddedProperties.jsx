@@ -21,7 +21,7 @@ const MyAddedProperties = () => {
                 setProperties(response.data); // Handle success
             })
             .catch(error => {
-                console.error("Error fetching properties:", error); // Handle error
+                console.error("Error fetching properties:", error); // Handle err
             });
     }, [user, axiosSecure]); // Dependencies: user and axiosSecure to trigger fetch when user info is available
 
