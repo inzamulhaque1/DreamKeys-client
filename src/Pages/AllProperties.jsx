@@ -5,15 +5,35 @@ import { useNavigate } from "react-router-dom";
 const AllProperties = () => {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filteredProperties, setFilteredProperties] = useState([]);
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(1000000);
+
+  const [searchQuery, setSearchQuery] = useState(''); // For location search
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
 
+  // Fetch properties
   useEffect(() => {
     axiosSecure.get("/properties").then((response) => {
       setProperties(response.data);
+      setFilteredProperties(response.data); // Set filtered properties to all initially
       setLoading(false);
     });
   }, [axiosSecure]);
+
+  // Filter properties based on price range and location search
+  useEffect(() => {
+    const filtered = properties.filter(
+      (property) =>
+        property.priceRange.min >= minPrice &&
+        property.priceRange.max <= maxPrice &&
+        property.location.toLowerCase().includes(searchQuery.toLowerCase()) // Filter by location
+    );
+    setFilteredProperties(filtered);
+  }, [minPrice, maxPrice, properties, searchQuery]);
+
+
 
   if (loading) {
     return <div>Loading properties...</div>;
@@ -37,11 +57,50 @@ const AllProperties = () => {
   return (
     <div className="p-8">
       <h1 className="text-3xl font-bold mb-6 text-center">All Properties</h1>
+
+      {/* Location Search */}
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold mb-4">Search by Location</h2>
+        <input
+          type="text"
+          placeholder="Search by location"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="border p-2 rounded-lg w-full sm:w-96 mb-4"
+        />
+      </div>
+
+      {/* Price Range Filter */}
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold mb-4">Filter by Price</h2>
+        <div className="flex justify-between mb-4">
+          <div className="flex gap-2">
+            <input
+              type="number"
+              placeholder="Min Price"
+              value={minPrice}
+              onChange={(e) => setMinPrice(Number(e.target.value))}
+              className="border p-2 rounded-lg w-32"
+            />
+            <input
+              type="number"
+              placeholder="Max Price"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(Number(e.target.value))}
+              className="border p-2 rounded-lg w-32"
+            />
+          </div>
+        </div>
+      </div>
+
+      
+
+      {/* Property Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {properties.map((property) => (
+        {filteredProperties.map((property) => (
           <div
             key={property._id}
-            className="relative border rounded-lg overflow-hidden shadow-md bg-white hover:shadow-lg transition-transform transform hover:scale-105"
+            className="relative border rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-2xl transition-transform transform hover:scale-105"
           >
             {/* Property Image */}
             <div className="h-48 overflow-hidden">
@@ -80,14 +139,17 @@ const AllProperties = () => {
                 </span>
               </p>
               <p className="text-sm text-gray-600">
-                <span className="font-semibold">Price Range:</span> $
+                <span className="font-semibold">Price Range:</span> $ 
                 {property.priceRange.min} - ${property.priceRange.max}
               </p>
             </div>
 
             {/* CTA Button */}
             <div className="p-4 border-t bg-gray-50">
-              <button onClick={() => handleViewDetails(property._id)} className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
+              <button
+                onClick={() => handleViewDetails(property._id)}
+                className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+              >
                 View Details
               </button>
             </div>

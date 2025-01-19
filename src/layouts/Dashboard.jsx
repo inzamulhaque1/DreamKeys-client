@@ -143,7 +143,7 @@ const Dashboard = () => {
                       }
                     >
                       {isSidebarOpen ? (
-                        <span className="ml-2">All Users</span>
+                        <span className="ml-2">Manage Users</span>
                       ) : (
                         <FaUser className="text-lg" />
                       )}
@@ -265,6 +265,22 @@ const Dashboard = () => {
                     >
                       {isSidebarOpen ? (
                         <span className="ml-2">Requested Property</span>
+                      ) : (
+                        <FaUser className="text-lg" />
+                      )}
+                    </NavLink>
+                    <NavLink
+                      to={"my-sold-property"}
+                      className={({ isActive }) =>
+                        `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
+                          isActive
+                            ? "text-white font-bold border-white border-2 bg-red-500"
+                            : "text-white"
+                        }`
+                      }
+                    >
+                      {isSidebarOpen ? (
+                        <span className="ml-2">My Sold Property</span>
                       ) : (
                         <FaUser className="text-lg" />
                       )}

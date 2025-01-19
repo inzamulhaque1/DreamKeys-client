@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import useAuth from "../hooks/useAuth";
+import Swal from "sweetalert2";
 
 
 
@@ -14,8 +15,10 @@ const PropertyDetails = () => {
   const [showModal, setShowModal] = useState(false);
   const [reviewText, setReviewText] = useState('');
   const {user} = useAuth()
-  const [ setReviewStatus] = useState('pending');
+  // eslint-disable-next-line no-unused-vars
+  const [ reviewStatus, setReviewStatus] = useState('pending');
   const [reviews, setReviews] = useState([]);
+  const [isAddedToWishlist, setIsAddedToWishlist] = useState(false);
 
 
   useEffect(() => {
@@ -49,35 +52,59 @@ const PropertyDetails = () => {
     axiosSecure
       .post(`/wishlist`, { propertyId: id })
       .then(() => {
-        // Show confirmation
-        alert("Property added to wishlist!");
+        // Show SweetAlert confirmation
+        Swal.fire({
+          icon: 'success',
+          title: 'Property added to wishlist!',
+          showConfirmButton: true,
+        });
+        setIsAddedToWishlist(true); // Disable the button after adding to wishlist
       })
       .catch((error) => {
         console.error("Error adding to wishlist:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed to add to wishlist!',
+          text: error.message,
+        });
       });
   };
+  
+  
 
   const handleSubmit = () => {
     // Submit review with status 'pending'
     const reviewData = {
       text: reviewText,
-      userId: user.uid, // Assuming you have user UID
+      userId: user.uid,
       username: user.displayName,
       userPhoto: user.photoURL,
       reviewStatus: 'pending', // Initially set to 'pending'
     };
-
+  
     axiosSecure
       .post(`/reviews/${id}`, reviewData) // Assuming reviews endpoint for the property
       .then(() => {
-        console.log('Review Submitted:', reviewText);
         setReviewStatus('pending'); // Reset the review status to pending
         setShowModal(false); // Close the modal
+        Swal.fire({
+          icon: 'success',
+          title: 'Review Submitted!',
+          text: 'Your review is pending approval.',
+          showConfirmButton: true,
+        });
       })
       .catch((error) => {
         console.error("Error submitting review:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed to submit review!',
+          text: error.message,
+          showConfirmButton: true,
+        });
       });
   };
+  
 
   if (loading) {
     return <div>Loading property details...</div>;
@@ -102,26 +129,48 @@ const PropertyDetails = () => {
         <span className="font-semibold">Agent:</span> {property.agentName}
       </p>
       <button
-        onClick={handleAddToWishlist}
-        className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition mb-6"
-      >
-        Add to Wishlist
-      </button>
+  onClick={handleAddToWishlist}
+  className="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition mb-6"
+  disabled={isAddedToWishlist} // Disable the button if property is added to the wishlist
+>
+  {isAddedToWishlist ? 'Added to Wishlist' : 'Add to Wishlist'}
+</button>
 
-              {/* Display reviews section */}
-        
-              {reviews.map((review) => (
+{reviews.map((review) => (
   review.reviewStatus === 'approved' && (
-    <div key={review._id} className="mt-8 p-4 bg-gray-100 rounded-md">
-      <h3 className="font-semibold text-xl">User Review</h3>
-      <div className="flex items-center mt-4">
-        <img src={review.userPhoto} alt={review.username} className="w-12 h-12 rounded-full mr-4" />
-        <span className="font-semibold text-lg">{review.username}</span>
+    <div key={review._id} className="flex flex-col md:flex-row items-start p-6 bg-white rounded-lg shadow-lg mb-6 transition-all hover:shadow-2xl">
+      
+      {/* Left Section: User Image and Name */}
+      <div className="flex flex-col items-center space-y-3 md:w-1/4">
+        <img
+          src={review.userPhoto}
+          alt={review.username}
+          className="w-20 h-20 rounded-full object-cover border-4 border-indigo-500 shadow-md"
+        />
+        <span className="font-semibold text-lg text-gray-800">{review.username}</span>
+        
       </div>
-      <p className="text-gray-700 mt-2">{review.text}</p>
+      
+      {/* Right Section: Review Content */}
+      <div className="md:ml-8 w-full md:w-3/4 flex flex-col justify-between space-y-4">
+        
+        {/* Review Text */}
+        <p className="text-gray-700 text-lg mt-2">
+          {review.text}
+        </p>
+        
+        {/* Helpful Button */}
+        <button className="self-start text-indigo-600 hover:text-indigo-800 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+          Helpful
+        </button>
+
+        <span className="text-sm text-gray-500">{review.createdAt}</span>
+      </div>
     </div>
   )
 ))}
+
+
 
       {/* Review Section */}
       <div>

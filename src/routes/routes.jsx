@@ -20,6 +20,10 @@ import PropertyDetails from "../Pages/PropertyDetails";
 import MakeOffer from "../Pages/Dashboard/User/MakeOffer";
 import RequestedProperties from "../Pages/Dashboard/Agent/RequestedProperties";
 import UpdateProperty from "../Pages/Dashboard/Agent/UpdateProperty";
+import MySoldProperties from "../Pages/Dashboard/Agent/MySoldProperties";
+import PaymentPage from "../Pages/Payment/PaymentPage ";
+import PrivateRoute from "./PrivateRoute";
+
 
 
 const router = createBrowserRouter([
@@ -33,7 +37,7 @@ const router = createBrowserRouter([
       },
       {
         path: "all-properties",
-        element: <AllProperties></AllProperties>,
+        element: <PrivateRoute><AllProperties></AllProperties></PrivateRoute>,
       },
       {
         path: "property-details/:id",
@@ -52,7 +56,7 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <Dashboard></Dashboard>,
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
 
       // Admin
@@ -94,6 +98,10 @@ const router = createBrowserRouter([
         path: 'requested-property',
         element: <RequestedProperties></RequestedProperties>
       },
+      {
+        path: 'my-sold-property',
+        element: <MySoldProperties></MySoldProperties>
+      },
       // User
       {
         path: 'my-profile',
@@ -114,6 +122,10 @@ const router = createBrowserRouter([
       {
         path: `make-offer/:id`,
         element:<MakeOffer></MakeOffer>
+      },
+      {
+        path: 'payment',
+        element:<PaymentPage></PaymentPage>
       },
       
     ]

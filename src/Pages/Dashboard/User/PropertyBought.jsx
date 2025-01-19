@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const PropertyBought = () => {
   const [bids, setBids] = useState(null);
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   // Fetch bids data
   useEffect(() => {
@@ -29,6 +31,13 @@ const PropertyBought = () => {
       rejected: "text-red-500",
     };
     return ribbonColors[offerStatus] || "text-blue-500"; // Default color for unknown statuses
+  };
+
+  const handlePayClick = (bidId, offerAmount) => {
+    // Redirect to the payment page with the necessary data
+    navigate("/payment", {
+      state: { bidId, offerAmount },
+    });
   };
 
   return (
@@ -67,7 +76,14 @@ const PropertyBought = () => {
             </p>
 
             {
-              bid?.offerStatus === 'accepted' && <button className="btn btn-primary">PAY</button>
+              bid?.offerStatus === 'accepted' && <button
+              className="btn btn-primary"
+              onClick={() =>
+                handlePayClick(bid?.id, bid?.offerAmount)
+              }
+            >
+              PAY
+            </button>
             }
             
           </div>

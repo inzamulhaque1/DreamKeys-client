@@ -1,4 +1,5 @@
 import Hero from "./Hero";
+import LatestReviews from "./LatestReviews";
 import Slider from "./Slider";
 
 
@@ -7,6 +8,8 @@ const Home = () => {
     <div>
         <Hero></Hero>
         <Slider></Slider>
+        <LatestReviews></LatestReviews>
+        
        
       
     </div>

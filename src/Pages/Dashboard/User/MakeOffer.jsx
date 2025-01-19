@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const MakeOffer = () => {
   const { id } = useParams(); // Get property id from the URL
@@ -28,35 +29,45 @@ const MakeOffer = () => {
 
   const handleOfferSubmit = (e) => {
     e.preventDefault();
-
+  
+    // Convert offerAmount to a number
+    const numericOfferAmount = parseFloat(offerAmount);
+  
     // Ensure offer amount is within the specified range
-    if (
-      offerAmount < property.priceRange.min ||
-      offerAmount > property.priceRange.max
-    ) {
+    if (numericOfferAmount < property.priceRange.min || numericOfferAmount > property.priceRange.max) {
       setError(
         `Offer amount must be between $${property.priceRange.min} and $${property.priceRange.max}`
       );
       return;
     }
-
+  
     // Make an offer (you can send the offer data to your API here)
+
+    
     axiosSecure
       .post("/bids", {
         propertyId: property?.propertyId,
-        offerAmount,
+        offerAmount: numericOfferAmount,
         agentEmail: property.agentEmail,
         buyerName: user?.displayName, 
         buyerEmail: user?.email, 
         buyingDate,
       })
       .then(() => {
-        navigate("/dashboard/wishlist"); 
+        Swal.fire({
+          title: "Offer Submitted!",
+          text: "Your offer has been successfully submitted.",
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then(() => {
+          navigate("/dashboard/wishlist"); // Navigate after SweetAlert closes
+        });
       })
       .catch((error) => {
         console.error("Error submitting the offer:", error);
       });
   };
+  
 
   if (!property) {
     return <div>Loading property details...</div>;

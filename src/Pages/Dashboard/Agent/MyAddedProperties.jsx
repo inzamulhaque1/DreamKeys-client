@@ -27,7 +27,7 @@ const MyAddedProperties = () => {
 
     const handleUpdate = (property) => {
         // Redirect to update page with the property id
-        navigate(`/update-property/${property._id}`, { state: { property } });
+        navigate(`/dashboard/update-property/${property._id}`, { state: { property } });
     };
 
     const handleDelete = (propertyId) => {
@@ -48,6 +48,9 @@ const MyAddedProperties = () => {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {
+                properties.length ===0 && <p>No Properties Added by you</p>
+            }
             {properties.map((property) => (
                 <div key={property._id} className="border rounded-lg p-4 shadow-lg">
                     {/* Property Image */}

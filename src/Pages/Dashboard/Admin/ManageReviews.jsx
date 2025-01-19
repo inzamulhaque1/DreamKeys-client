@@ -13,6 +13,7 @@ const ManageReviews = () => {
             .then((response) => {
                 setReviews(response.data);
                 setLoading(false);
+                console.log(response.data);
             })
             .catch((error) => {
                 console.error("Error fetching reviews:", error);
@@ -46,6 +47,21 @@ const ManageReviews = () => {
         updateReviewStatus(reviewId, 'rejected');
     };
 
+    const handleDelete = (reviewId) => {
+        // Delete review from the backend
+        axiosSecure
+            .delete(`/reviews/${reviewId}`)
+            .then(() => {
+                // Remove review from local state
+                setReviews((prevReviews) =>
+                    prevReviews.filter((review) => review._id !== reviewId)
+                );
+            })
+            .catch((error) => {
+                console.error("Error deleting review:", error);
+            });
+    };
+
     if (loading) {
         return <div>Loading reviews...</div>;
     }
@@ -57,9 +73,10 @@ const ManageReviews = () => {
                 <table className="min-w-full bg-white border border-gray-300">
                     <thead>
                         <tr className="bg-gray-200 text-left">
-                            <th className="px-4 py-2 border">Username</th>
+                            <th className="px-4 py-2 border">Reviewer Image</th>
+                            <th className="px-4 py-2 border">Reviewer Name</th>
+                            
                             <th className="px-4 py-2 border">Review</th>
-                            <th className="px-4 py-2 border">Property ID</th>
                             <th className="px-4 py-2 border">Status</th>
                             <th className="px-4 py-2 border">Actions</th>
                         </tr>
@@ -67,9 +84,16 @@ const ManageReviews = () => {
                     <tbody>
                         {reviews.map((review) => (
                             <tr key={review._id} className="hover:bg-gray-100">
+                                <td className="px-4 py-2 border">
+                                    <img
+                                        src={review.userPhoto || "/default-avatar.png"}
+                                        alt="Reviewer"
+                                        className="w-10 h-10 rounded-full"
+                                    />
+                                </td>
                                 <td className="px-4 py-2 border">{review.username}</td>
+                                
                                 <td className="px-4 py-2 border">{review.text}</td>
-                                <td className="px-4 py-2 border">{review.propertyId}</td>
                                 <td className="px-4 py-2 border capitalize">{review.reviewStatus}</td>
                                 <td className="px-4 py-2 border">
                                     {review.reviewStatus === 'pending' && (
@@ -94,6 +118,12 @@ const ManageReviews = () => {
                                     {review.reviewStatus === 'rejected' && (
                                         <span className="text-red-500">Rejected</span>
                                     )}
+                                    <button
+                                        className="bg-gray-500 text-white px-4 py-2 rounded mt-2"
+                                        onClick={() => handleDelete(review._id)}
+                                    >
+                                        Delete
+                                    </button>
                                 </td>
                             </tr>
                         ))}

@@ -3,8 +3,10 @@ import { FaTrash } from "react-icons/fa";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from 'sweetalert2';
 
+
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
+
 
   // Fetch users data using useQuery
   const { data: users = [], refetch } = useQuery({
@@ -15,68 +17,72 @@ const AllUsers = () => {
     },
   });
 
+  // Handle role updates (Make Admin/Agent)
   const handleUpdateRole = (userId, newRole) => {
     axiosSecure.patch(`/users/${userId}/role`, { role: newRole })
       .then((res) => {
         if (res.status === 200) {
-          console.log(res.data.message); // Log success
+          Swal.fire("Success!", res.data.message, "success");
           refetch();
         }
       })
       .catch((error) => {
-        console.error("Failed to update role:", error.response?.data?.message || error.message);
+        Swal.fire("Error!", error.response?.data?.message || error.message, "error");
       });
   };
 
+  // Mark user as fraud and delete their properties
   const handleMarkAsFraud = (userId) => {
-    axiosSecure.patch(`/users/${userId}/fraud`)
-      .then((res) => {
-        if (res.status === 200) {
-          console.log("User marked as fraud");
-        //   Remove all properties related to this agent
-          axiosSecure.delete(`/properties/agent/${userId}`)
-            .then(() => {
-              refetch();
-            })
-            .catch((error) => {
-              console.error("Failed to remove properties:", error.response?.data?.message || error.message);
-            });
-        }
-      })
-      .catch((error) => {
-        console.error("Failed to mark as fraud:", error.response?.data?.message || error.message);
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This will mark the agent as fraud and delete all their properties.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, mark as fraud!",
+      cancelButtonText: "No, cancel!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/users/${userId}/fraud`)
+          .then((res) => {
+            if (res.status === 200) {
+              Swal.fire("Marked as Fraud!", "The user has been marked as fraud.", "success");
+              // Delete all properties by the agent
+              axiosSecure.delete(`/properties/agent/${userId}`)
+                .then(() => {
+                  refetch();
+                })
+                .catch(() => {
+                  Swal.fire("Error!", "Failed to remove agent's properties.", "error");
+                });
+            }
+          })
+          .catch((error) => {
+            Swal.fire("Error!", error.response?.data?.message || error.message, "error");
+          });
+      }
+    });
   };
 
+  // Delete user
   const handleDeleteUser = (userId) => {
     Swal.fire({
-      title: 'Are you sure?',
+      title: "Are you sure?",
       text: "You won't be able to revert this!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!',
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel!",
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/users/${userId}`)
           .then((res) => {
             if (res.status === 200) {
-              Swal.fire({
-                title: 'Deleted!',
-                text: 'User has been deleted.',
-                icon: 'success',
-                confirmButtonText: 'Ok'
-              });
+              Swal.fire("Deleted!", "User has been deleted.", "success");
               refetch();
             }
           })
           .catch((error) => {
-            Swal.fire({
-              title: 'Error!',
-              text: error.response?.data?.message || error.message,
-              icon: 'error',
-              confirmButtonText: 'Ok'
-            });
+            Swal.fire("Error!", error.response?.data?.message || error.message, "error");
           });
       }
     });
@@ -111,7 +117,7 @@ const AllUsers = () => {
               <td className="border px-4 py-2">{user.email}</td>
               <td className="border px-4 py-2 text-center">
                 {user.isFraud ? (
-                  <span className="text-red-500">Fraud</span>
+                  <span className="text-red-500 font-bold">Fraud</span>
                 ) : (
                   user.role
                 )}
@@ -140,7 +146,7 @@ const AllUsers = () => {
                     {user.role === 'agent' && (
                       <button
                         className="bg-yellow-500 text-white px-2 py-1 text-xs rounded mr-2"
-                        onClick={() => handleMarkAsFraud(user._id)}
+                        onClick={() => handleMarkAsFraud(user._id, 'fraud')}
                       >
                         Mark as Fraud
                       </button>

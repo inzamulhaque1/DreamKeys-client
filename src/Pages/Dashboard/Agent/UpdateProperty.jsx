@@ -1,7 +1,7 @@
-import  { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom'; // For accessing state and navigating
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
-
+import Swal from 'sweetalert2'; // Import SweetAlert2
 
 const UpdateProperty = () => {
     const { state } = useLocation(); // Access the state passed from MyAddedProperties
@@ -49,11 +49,24 @@ const UpdateProperty = () => {
         // Update the property in the database
         axiosSecure.patch(`/properties/${property._id}`, property)
             .then(() => {
-               
-                navigate('/my-properties'); // Navigate back to the properties page after successful update
+                // Show SweetAlert before navigating
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Property updated successfully',
+                    text: 'Your property has been updated.',
+                    confirmButtonText: 'OK',
+                }).then(() => {
+                    // Navigate after the user clicks 'OK' on SweetAlert
+                    navigate('/dashboard/my-added-property', { state: { message: 'Property updated successfully' } });
+                });
             })
             .catch((error) => {
                 console.error('Error updating property:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Update Failed',
+                    text: 'There was an issue updating the property.',
+                });
             });
     };
 
