@@ -21,8 +21,10 @@ import MakeOffer from "../Pages/Dashboard/User/MakeOffer";
 import RequestedProperties from "../Pages/Dashboard/Agent/RequestedProperties";
 import UpdateProperty from "../Pages/Dashboard/Agent/UpdateProperty";
 import MySoldProperties from "../Pages/Dashboard/Agent/MySoldProperties";
-import PaymentPage from "../Pages/Payment/PaymentPage ";
+
 import PrivateRoute from "./PrivateRoute";
+import AdvertiseProperty from "../Pages/Dashboard/Admin/AdvertiseProperty";
+import Payment from "../Pages/Payment/Payment";
 
 
 
@@ -76,6 +78,10 @@ const router = createBrowserRouter([
         path: 'manage-reviews',
         element:<ManageReviews></ManageReviews>
       },
+      {
+        path: 'advertise-property',
+        element:<AdvertiseProperty></AdvertiseProperty>
+      },
       // Agent
       {
         path: 'agent-profile',
@@ -125,7 +131,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'payment',
-        element:<PaymentPage></PaymentPage>
+        element: <Payment></Payment>
       },
       
     ]

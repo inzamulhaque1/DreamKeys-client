@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const PropertyBought = () => {
   const [bids, setBids] = useState(null);
@@ -35,6 +35,7 @@ const PropertyBought = () => {
 
   const handlePayClick = (bidId, offerAmount) => {
     // Redirect to the payment page with the necessary data
+    console.log(bidId, offerAmount);
     navigate("/payment", {
       state: { bidId, offerAmount },
     });
@@ -76,15 +77,16 @@ const PropertyBought = () => {
             </p>
 
             {
-              bid?.offerStatus === 'accepted' && <button
+              bid?.offerStatus === 'accepted' && <Link to={'/dashboard/payment'}> <button
               className="btn btn-primary"
               onClick={() =>
-                handlePayClick(bid?.id, bid?.offerAmount)
+                handlePayClick(bid?._id, bid?.offerAmount)
               }
             >
               PAY
-            </button>
+            </button></Link>
             }
+            
             
           </div>
         ))}

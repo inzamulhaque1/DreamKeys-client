@@ -27,7 +27,7 @@ const Slider = () => {
         <SwiperSlide key={index}>
           <div
             className="h-[600px] sm:h-[600px] bg-cover bg-center flex items-center justify-center text-white"
-            style={{ backgroundImage: `url(${slide.image})` }}
+            style={{ backgroundImage: `url(${slide.image})`  }}
           >
             <h2 className="text-2xl sm:text-4xl font-bold bg-black bg-opacity-50 p-4 rounded">
               {slide.text}
