@@ -25,6 +25,7 @@ import MySoldProperties from "../Pages/Dashboard/Agent/MySoldProperties";
 import PrivateRoute from "./PrivateRoute";
 import AdvertiseProperty from "../Pages/Dashboard/Admin/AdvertiseProperty";
 import Payment from "../Pages/Payment/Payment";
+import SellingStatistics from "../Pages/Dashboard/Agent/SellingStatistics";
 
 
 
@@ -107,6 +108,10 @@ const router = createBrowserRouter([
       {
         path: 'my-sold-property',
         element: <MySoldProperties></MySoldProperties>
+      },
+      {
+        path: 'selling-statistics',
+        element: <SellingStatistics></SellingStatistics>
       },
       // User
       {

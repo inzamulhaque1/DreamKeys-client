@@ -301,6 +301,22 @@ const Dashboard = () => {
                         <FaUser className="text-lg" />
                       )}
                     </NavLink>
+                    <NavLink
+                      to={"selling-statistics"}
+                      className={({ isActive }) =>
+                        `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
+                          isActive
+                            ? "text-white font-bold border-white border-2 bg-red-500"
+                            : "text-white"
+                        }`
+                      }
+                    >
+                      {isSidebarOpen ? (
+                        <span className="ml-2">Statistics</span>
+                      ) : (
+                        <FaUser className="text-lg" />
+                      )}
+                    </NavLink>
                   </>
                 )}
 

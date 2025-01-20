@@ -47,6 +47,7 @@ const MakeOffer = () => {
     axiosSecure
       .post("/bids", {
         propertyId: property?.propertyId,
+        propertyTitle: property?.title,
         offerAmount: numericOfferAmount,
         agentEmail: property.agentEmail,
         buyerName: user?.displayName, 

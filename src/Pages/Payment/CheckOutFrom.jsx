@@ -33,13 +33,17 @@ const CheckOutFrom = () => {
     .then((response) => {
       setProperty(response.data);
 
-console.log(response.data);
+      console.log(response.data);
+
+
 
       if(response.data?.offerAmount > 0){
         axiosSecure.post("/create-payment-intent", {price: response.data?.offerAmount})
+
+        
        
     .then(res => {
-        console.log(res.data.clientSecret);
+       
         setClientSecret(res.data.clientSecret)
     })
     }
@@ -74,7 +78,7 @@ console.log(response.data);
     });
 
     if (error) {
-      console.log("payment error", error);
+      ;
       setError(error.message);
     } else {
       console.log("payment method", paymentMethod);
@@ -99,7 +103,7 @@ console.log(response.data);
     } else {
         console.log('payment intent',paymentIntent)
         if(paymentIntent.status === 'succeeded'){
-            console.log('transaction id', paymentIntent.id)
+            
             setTransactionId(paymentIntent.id)
 
             // now save the data in the database
@@ -110,10 +114,13 @@ console.log(response.data);
                 transactionId: paymentIntent.id,
                 date: new Date(),
                 agentEmail: property.agentEmail,
-                
+                propertyTitle: property.propertyTitle,
                 bidId: property._id
+
                 
             }
+
+            console.log(payment);
 
             const res = await axiosSecure.post('/payments', payment)
             console.log('payment saves', res.data)
@@ -128,7 +135,7 @@ console.log(response.data);
 
 
 
-    console.log(stripe , clientSecret);
+   
 
 
 

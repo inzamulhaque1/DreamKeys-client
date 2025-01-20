@@ -45,7 +45,7 @@ const MySoldProperties = () => {
         <table className="min-w-full border border-gray-200 text-left">
           <thead>
             <tr>
-              <th className="px-4 py-2 border">Property Id</th>
+              <th className="px-4 py-2 border">Property Title</th>
               <th className="px-4 py-2 border">Buyer Email</th>
               <th className="px-4 py-2 border">Transaction ID</th>
               <th className="px-4 py-2 border">Amount (USD)</th>
@@ -55,7 +55,7 @@ const MySoldProperties = () => {
           <tbody>
             {payments.map((payment) => (
               <tr key={payment._id}>
-                <td className="px-4 py-2 border">{payment.bidId || "N/A"}</td>
+                <td className="px-4 py-2 border">{payment.propertyTitle || "N/A"}</td>
                 <td className="px-4 py-2 border">{payment.email}</td>
                 <td className="px-4 py-2 border">{payment.transactionId}</td>
                 <td className="px-4 py-2 border">${payment.price}</td>
