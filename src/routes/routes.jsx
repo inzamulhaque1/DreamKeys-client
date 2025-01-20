@@ -26,6 +26,7 @@ import PrivateRoute from "./PrivateRoute";
 import AdvertiseProperty from "../Pages/Dashboard/Admin/AdvertiseProperty";
 import Payment from "../Pages/Payment/Payment";
 import SellingStatistics from "../Pages/Dashboard/Agent/SellingStatistics";
+import ErrorPage from "../Pages/Error/ErrorPage";
 
 
 
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",

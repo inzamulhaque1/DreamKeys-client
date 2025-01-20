@@ -1,0 +1,22 @@
+@keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+
+
+  .text-gradient {
+    background: linear-gradient(to right, red, blue, green);
+    -webkit-background-clip: text; /* Chrome, Safari 3 */
+    -moz-background-clip: text; /* Firefox 3.6+ */
+    -o-background-clip: text; /* Opera 10.6+ */
+    -ms-background-clip: text; /* Internet Explorer 9 */
+    background-clip: text;
+    color: transparent;
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
+  }
+  
