@@ -25,7 +25,7 @@ const SignUp = () => {
     setError(""); // Clear previous errors
   
     const name = e.target.name.value;
-    const email = e.target.email.value;
+    const email = e.target.email.value.toLowerCase();
     const password = e.target.password.value;
     const photoFile = e.target.photo.files[0];
     

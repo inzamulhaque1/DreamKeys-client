@@ -23,6 +23,7 @@ const Dashboard = () => {
     if (user && user.email) {
       // Ensure `user` is not null
       const userEmail = user?.email;
+      console.log(userEmail);
       axiosPublic
         .get("/users/role", { params: { email: userEmail } })
         .then((response) => {
