@@ -130,7 +130,7 @@ const router = createBrowserRouter([
         element:<MakeOffer></MakeOffer>
       },
       {
-        path: 'payment',
+        path: 'payment/:id',
         element: <Payment></Payment>
       },
       

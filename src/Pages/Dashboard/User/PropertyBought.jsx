@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const PropertyBought = () => {
   const [bids, setBids] = useState(null);
+  const [payments, setPayments] = useState(null); // To store payment data
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const navigate = useNavigate();
 
   // Fetch bids data
   useEffect(() => {
@@ -23,6 +23,19 @@ const PropertyBought = () => {
     }
   }, [axiosSecure, user]);
 
+  // Fetch payment data for the user
+  useEffect(() => {
+    if (user) {
+      axiosSecure
+        .get(`/payments/${user?.email}`)
+        .then((response) => {
+          setPayments(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching payments:", error);
+        });
+    }
+  }, [axiosSecure, user]);
 
   const getRibbonColor = (offerStatus) => {
     const ribbonColors = {
@@ -33,12 +46,9 @@ const PropertyBought = () => {
     return ribbonColors[offerStatus] || "text-blue-500"; // Default color for unknown statuses
   };
 
-  const handlePayClick = (bidId, offerAmount) => {
-    // Redirect to the payment page with the necessary data
-    console.log(bidId, offerAmount);
-    navigate("/payment", {
-      state: { bidId, offerAmount },
-    });
+  // Function to check if the bid is paid
+  const isPaid = (bidId) => {
+    return payments?.some(payment => payment.bidId === bidId); // Check if payment exists for this bid
   };
 
   return (
@@ -57,15 +67,13 @@ const PropertyBought = () => {
             />
             <h2 className="text-lg font-semibold mb-2">{bid?.title}</h2>
             <p className="text-sm font-semibold mb-2">
-                <span className="text-black font-bold">Status:</span>{" "}
-                <span
-                   className={`${getRibbonColor(
-                    bid?.offerStatus
-                  )} font-bold`}
-                >{bid?.offerStatus}
-                  
-                </span>
-              </p>
+              <span className="text-black font-bold">Status:</span>{" "}
+              <span
+                className={`${getRibbonColor(bid?.offerStatus)} font-bold`}
+              >
+                {bid?.offerStatus}
+              </span>
+            </p>
             <p className="text-sm text-gray-600 mb-1">
               <strong>Location:</strong> {bid?.location}
             </p>
@@ -76,18 +84,17 @@ const PropertyBought = () => {
               <strong>Offered Amount:</strong> ${bid?.offerAmount}
             </p>
 
-            {
-              bid?.offerStatus === 'accepted' && <Link to={'/dashboard/payment'}> <button
-              className="btn btn-primary"
-              onClick={() =>
-                handlePayClick(bid?._id, bid?.offerAmount)
-              }
-            >
-              PAY
-            </button></Link>
-            }
-            
-            
+            {isPaid(bid._id) ? (
+              <p className="text-sm text-green-500 font-bold">
+                Transaction ID: {payments.find(payment => payment.bidId === bid._id)?.transactionId}
+              </p>
+            ) : (
+              bid?.offerStatus === "accepted" && (
+                <Link to={`/dashboard/payment/${bid._id}`}>
+                  <button className="btn btn-primary">PAY</button>
+                </Link>
+              )
+            )}
           </div>
         ))}
       </div>

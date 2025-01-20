@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 import useAuth from "../../hooks/useAuth";
-import { useLocation } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 
 
 
@@ -16,28 +16,47 @@ const CheckOutFrom = () => {
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
 
-  const location = useLocation();
-  const { bidId, offerAmount } = location.state || {};
-  console.log(bidId, offerAmount)
+  const [property, setProperty] = useState(null);
 
-  
+
   const {user} = useAuth()
-  const totalPrice = 500 ; // it will be dynamic 
+  
+  const { id } = useParams();
 
 
- 
 
   useEffect(() => {
 
-    if(totalPrice > 0){
-        axiosSecure.post("/create-payment-intent", {price: totalPrice,})
+
+    axiosSecure
+    .get(`/get-bid/${id}`)
+    .then((response) => {
+      setProperty(response.data);
+
+console.log(response.data);
+
+      if(response.data?.offerAmount > 0){
+        axiosSecure.post("/create-payment-intent", {price: response.data?.offerAmount})
+       
     .then(res => {
         console.log(res.data.clientSecret);
         setClientSecret(res.data.clientSecret)
     })
     }
+      
+      
+    })
+    .catch((error) => {
+      console.error("Error fetching property details:", error);
+      
+    });
 
-  }, [axiosSecure, totalPrice]);
+
+
+
+
+
+  }, [axiosSecure, id]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -85,16 +104,22 @@ const CheckOutFrom = () => {
 
             // now save the data in the database
             const payment = {
+                BuyerName: user?.buyerName,
                 email: user.email,
-                price: totalPrice, 
+                price: property?.offerAmount, 
                 transactionId: paymentIntent.id,
                 date: new Date(),
-
-                status: 'pending'
+                agentEmail: property.agentEmail,
+                
+                bidId: property._id
+                
             }
 
             const res = await axiosSecure.post('/payments', payment)
             console.log('payment saves', res.data)
+
+
+            
             
 
         }
@@ -118,7 +143,7 @@ const CheckOutFrom = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-        <p>PAY NOW : {totalPrice}</p>
+        <p>PAY NOW : {property?.offerAmount}</p>
       <CardElement
         options={{
           style: {
