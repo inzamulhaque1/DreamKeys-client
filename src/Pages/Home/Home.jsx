@@ -1,4 +1,6 @@
 import Advertisement from "./Advertisement";
+import BlogSection from "./BlogSection";
+import FAQSection from "./FAQSection";
 import Hero from "./Hero";
 import LatestReviews from "./LatestReviews";
 import Slider from "./Slider";
@@ -11,6 +13,8 @@ const Home = () => {
         <Advertisement></Advertisement>
         <Slider></Slider>
         <LatestReviews></LatestReviews>
+        <BlogSection></BlogSection>
+        <FAQSection></FAQSection>
         
        
       
