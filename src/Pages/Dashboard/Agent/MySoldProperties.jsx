@@ -12,7 +12,7 @@ const MySoldProperties = () => {
   useEffect(() => {
     const fetchPayments = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/payments", {
+        const response = await axios.get("https://assignment12-server-phi.vercel.app/payments", {
           params: { agentEmail },
         });
         setPayments(response.data);
