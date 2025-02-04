@@ -1,7 +1,7 @@
 # DreamKey
 
 ![DreamKey Logo](https://i.ibb.co.com/20rpD2y8/dreamkey.jpg) <!-- Replace with your logo URL -->
-co | width=50)
+
 
 # DreamKey
 
