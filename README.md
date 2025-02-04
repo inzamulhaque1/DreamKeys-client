@@ -16,23 +16,23 @@ DreamKey offers a range of features designed to help you stay motivated and achi
 
 - **User Authentication:**
    - 🔒 Secure login and registration system for user privacy.
-   - ![Authentication](https://example.com/auth-image.png) <!-- Replace with a relevant image URL -->
+   - ![Authentication](https://example.com/auth-image.png | width=300) <!-- Adjust width as needed -->
 
 - **Dream Tracker:**
    - 📅 Add, edit, and track your dreams/goals with descriptions and due dates.
-   - ![Dream Tracker](https://example.com/dream-tracker-image.png) <!-- Replace with a relevant image URL -->
+   - ![Dream Tracker](https://example.com/dream-tracker-image.png | width=300)
 
 - **Goal Progress:**
    - 📊 Monitor your progress through visual charts and statistics.
-   - ![Progress Tracking](https://example.com/progress-image.png) <!-- Replace with a relevant image URL -->
+   - ![Progress Tracking](https://example.com/progress-image.png | width=300)
 
 - **Personalized Experience:**
    - 🎨 Customizable user profiles and preferences to make the app feel like yours.
-   - ![Personalized](https://example.com/personalized-image.png) <!-- Replace with a relevant image URL -->
+   - ![Personalized](https://example.com/personalized-image.png | width=300)
 
 - **Notifications:**
    - 🔔 Receive notifications to remind you of deadlines and milestones.
-   - ![Notifications](https://example.com/notifications-image.png) <!-- Replace with a relevant image URL -->
+   - ![Notifications](https://example.com/notifications-image.png | width=300)
 
 ## Tech Stack
 
@@ -42,33 +42,33 @@ DreamKey uses modern technologies to ensure a smooth, fast, and secure user expe
 
 - **React.js:**  
   A JavaScript library for building user interfaces.  
-  ![React Logo](https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg)  
+  ![React Logo](https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg | width=50)  
 
 - **Tailwind CSS:**  
   A utility-first CSS framework for creating custom designs with ease.  
-  ![Tailwind Logo](https://upload.wikimedia.org/wikipedia/commons/6/60/Tailwind_CSS_Logo.svg)  
+  ![Tailwind Logo](https://upload.wikimedia.org/wikipedia/commons/6/60/Tailwind_CSS_Logo.svg | width=50)  
 
 - **Axios:**  
   A promise-based HTTP client for making requests to the backend.  
-  ![Axios Logo](https://axios-http.com/img/axios-logo.svg)
+  ![Axios Logo](https://axios-http.com/img/axios-logo.svg | width=50)
 
 ### Backend
 
 - **Node.js:**  
   A JavaScript runtime built on Chrome's V8 JavaScript engine.  
-  ![Node.js Logo](https://nodejs.org/static/images/logo.svg)
+  ![Node.js Logo](https://nodejs.org/static/images/logo.svg | width=50)
 
 - **Express.js:**  
   A fast, unopinionated web framework for Node.js.  
-  ![Express.js Logo](https://expressjs.com/images/express-facebook-share.png)
+  ![Express.js Logo](https://expressjs.com/images/express-facebook-share.png | width=50)
 
 - **MongoDB:**  
   A NoSQL database that stores data in flexible, JSON-like documents.  
-  ![MongoDB Logo](https://www.mongodb.com/assets/images/global/favicon.ico)
+  ![MongoDB Logo](https://www.mongodb.com/assets/images/global/favicon.ico | width=50)
 
 - **CORS:**  
   A mechanism that allows resources to be requested from another domain outside the domain from which the resource originated.  
-  ![CORS](https://upload.wikimedia.org/wikipedia/commons/a/a7/Expressjs.png) <!-- Replace with relevant image if needed -->
+  ![CORS](https://upload.wikimedia.org/wikipedia/commons/a/a7/Expressjs.png | width=50)
 
 ## Getting Started
 
@@ -128,6 +128,9 @@ We welcome contributions! If you'd like to contribute to DreamKey, follow these 
 4. Push to your branch (`git push origin feature-name`).
 5. Open a pull request to the `main` branch.
 
+## License
+
+This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
