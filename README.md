@@ -2,8 +2,11 @@
 
 ![DreamKey Logo](https://i.ibb.co.com/20rpD2y8/dreamkey.jpg) <!-- Replace with your logo URL -->
 
-
 # DreamKey
+
+![DreamKey Logo](https://i.ibb.co.com/20rpD2y8/dreamkey.jpg) <!-- Replace with your logo URL -->
+
+## DreamKey
 
 Welcome to **DreamKey** – an innovative platform that helps you unlock your dreams and turn them into reality. This project aims to provide users with an intuitive, easy-to-use interface to manage and track their goals, dreams, and aspirations.
 
@@ -61,6 +64,17 @@ DreamKey uses modern technologies to ensure a smooth, fast, and secure user expe
 - **CORS:**  
   A mechanism that allows resources to be requested from another domain outside the domain from which the resource originated.
 
+## Screenshots
+
+### Home Page
+![Home Page](https://github.com/inzamulhaque1/DreamKeys-client/blob/main/src/assets/d1.png) 
+
+### Dream Tracker
+![Dream Tracker](https://via.placeholder.com/600x400?text=Dream+Tracker)
+
+### Progress Monitoring
+![Progress Monitoring](https://via.placeholder.com/600x400?text=Progress+Monitoring)
+
 ## Getting Started
 
 To get started with DreamKey on your local machine, follow these steps:
@@ -109,6 +123,55 @@ To get started with DreamKey on your local machine, follow these steps:
 
 Once both servers are running, you can access the app by navigating to `http://localhost:3000` in your browser.
 
+## Dependencies
+
+Below are the key dependencies used in the DreamKey project:
+
+### Core Dependencies
+```json
+{
+  "@lottiefiles/react-lottie-player": "^3.5.4",
+  "@stripe/react-stripe-js": "^3.1.1",
+  "@stripe/stripe-js": "^5.5.0",
+  "@tanstack/react-query": "^5.64.1",
+  "axios": "^1.7.9",
+  "firebase": "^11.1.0",
+  "localforage": "^1.10.0",
+  "match-sorter": "^8.0.0",
+  "react": "^18.3.1",
+  "react-dom": "^18.3.1",
+  "react-hook-form": "^7.54.2",
+  "react-icons": "^5.4.0",
+  "react-modal": "^3.16.3",
+  "react-router-dom": "^7.1.1",
+  "recharts": "^2.15.0",
+  "sort-by": "^1.2.0",
+  "stripe": "^17.5.0",
+  "sweetalert2": "^11.15.10",
+  "swiper": "^11.2.1"
+}
+```
+
+### Dev Dependencies
+```json
+{
+  "@eslint/js": "^9.17.0",
+  "@types/react": "^18.3.18",
+  "@types/react-dom": "^18.3.5",
+  "@vitejs/plugin-react": "^4.3.4",
+  "autoprefixer": "^10.4.20",
+  "daisyui": "^4.12.23",
+  "eslint": "^9.17.0",
+  "eslint-plugin-react": "^7.37.2",
+  "eslint-plugin-react-hooks": "^5.0.0",
+  "eslint-plugin-react-refresh": "^0.4.16",
+  "globals": "^15.14.0",
+  "postcss": "^8.4.49",
+  "tailwindcss": "^3.4.17",
+  "vite": "^6.0.5"
+}
+```
+
 ## Contributing
 
 We welcome contributions! If you'd like to contribute to DreamKey, follow these steps:
@@ -133,4 +196,6 @@ Feel free to reach out if you have any questions, suggestions, or feedback:
 ---
 
 Thanks for checking out DreamKey! Let's make your dreams come true, one step at a time. 🌟
+
+
 
