@@ -71,6 +71,15 @@ DreamKey uses modern technologies to ensure a smooth, fast, and secure user expe
 ### Progress Monitoring
 ![Progress Monitoring](https://github.com/inzamulhaque1/DreamKeys-client/blob/main/src/assets/d3.png)
 
+### More Screenshots
+![ss](https://github.com/inzamulhaque1/DreamKeys-client/blob/main/src/assets/d4.png)
+![ss](https://github.com/inzamulhaque1/DreamKeys-client/blob/main/src/assets/d5.png)
+![ss](https://github.com/inzamulhaque1/DreamKeys-client/blob/main/src/assets/d6.png)
+![ss](https://github.com/inzamulhaque1/DreamKeys-client/blob/main/src/assets/d7.png)
+![ss](https://github.com/inzamulhaque1/DreamKeys-client/blob/main/src/assets/d8.png)
+![ss](https://github.com/inzamulhaque1/DreamKeys-client/blob/main/src/assets/d9.png)
+![ss](https://github.com/inzamulhaque1/DreamKeys-client/blob/main/src/assets/d10.png)
+
 ## Getting Started
 
 To get started with DreamKey on your local machine, follow these steps:
