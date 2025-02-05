@@ -2,10 +2,6 @@
 
 ![DreamKey Logo](https://i.ibb.co.com/20rpD2y8/dreamkey.jpg) <!-- Replace with your logo URL -->
 
-# DreamKey
-
-![DreamKey Logo](https://i.ibb.co.com/20rpD2y8/dreamkey.jpg) <!-- Replace with your logo URL -->
-
 ## DreamKey
 
 Welcome to **DreamKey** – an innovative platform that helps you unlock your dreams and turn them into reality. This project aims to provide users with an intuitive, easy-to-use interface to manage and track their goals, dreams, and aspirations.
@@ -70,10 +66,10 @@ DreamKey uses modern technologies to ensure a smooth, fast, and secure user expe
 ![Home Page](https://github.com/inzamulhaque1/DreamKeys-client/blob/main/src/assets/d1.png) 
 
 ### Dream Tracker
-![Dream Tracker](https://via.placeholder.com/600x400?text=Dream+Tracker)
+![Dream Tracker](https://github.com/inzamulhaque1/DreamKeys-client/blob/main/src/assets/d2.png)
 
 ### Progress Monitoring
-![Progress Monitoring](https://via.placeholder.com/600x400?text=Progress+Monitoring)
+![Progress Monitoring](https://github.com/inzamulhaque1/DreamKeys-client/blob/main/src/assets/d3.png)
 
 ## Getting Started
 
