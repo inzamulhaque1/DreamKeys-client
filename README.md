@@ -187,10 +187,6 @@ We welcome contributions! If you'd like to contribute to DreamKey, follow these 
 4. Push to your branch (`git push origin feature-name`).
 5. Open a pull request to the `main` branch.
 
-## License
-
-This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
-
 ## Contact
 
 Feel free to reach out if you have any questions, suggestions, or feedback:
