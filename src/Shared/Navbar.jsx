@@ -41,7 +41,7 @@ const Navbar = ({ toggleTheme, theme }) => {
 
   const links = (
     <>
-      <li className="text-black dark:text-white hover:bg-blue-600 rounded-xl hover:text-white">
+      <li className="text-black  dark:text-white hover:bg-blue-600 rounded-xl hover:text-white">
         <Link to={"/"}>Home</Link>
       </li>
       <li className="text-black dark:text-white hover:bg-blue-600 rounded-xl hover:text-white">
