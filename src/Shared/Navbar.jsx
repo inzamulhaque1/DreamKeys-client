@@ -90,11 +90,11 @@ const Navbar = () => {
         <div className="navbar-end">
           {!user ? (
             <>
-              <p className="text-black mr-6">
-                <Link to={"/login"}>Login</Link>
+              <p>
+                <Link to={"/login"} className="text-black border-2 border-black px-4 py-1 rounded-3xl font-bold  mr-6 hover:bg-black hover:text-white">Login</Link>
               </p>
-              <p className="text-black">
-                <Link to={"/sign-up"}>Sign Up</Link>
+              <p>
+                <Link to={"/sign-up"} className=" border-2 border-black text-white bg-black px-4 py-1 rounded-3xl font-bold  mr-6 hover:bg-white hover:text-black">Sign Up</Link>
               </p>
             </>
           ) : (
