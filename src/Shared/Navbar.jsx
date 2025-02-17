@@ -8,24 +8,20 @@ const Navbar = () => {
   const axiosSecure = useAxiosSecure(); // Custom Axios hook
   const navigate = useNavigate();
 
-
   // Fetch the user role from the backend
   useEffect(() => {
     if (!user) {
       return; // Exit if user is null
     }
-  
+
     const userEmail = user.email;
 
-  
     axiosSecure.get(`/users?email=${userEmail}`).then((response) => {
       const users = response.data; // Expecting an array
       const currentUser = users.find((u) => u.email === userEmail);
       setUserRole(currentUser?.role || "user");
     });
   }, [axiosSecure, user]);
-  
-  
 
   // Handle dashboard navigation
   const handleDashboardClick = () => {
@@ -43,10 +39,10 @@ const Navbar = () => {
         <Link to={"/"}>Home</Link>
       </li>
       <li className="text-black">
-        <Link  to={'all-properties'}>All Properties</Link>
+        <Link to={"all-properties"}>All Properties</Link>
       </li>
       <li className="text-black">
-        <Link  onClick={handleDashboardClick}>Dashboard</Link>
+        <Link onClick={handleDashboardClick}>Dashboard</Link>
       </li>
     </>
   );
@@ -90,13 +86,30 @@ const Navbar = () => {
         <div className="navbar-end">
           {!user ? (
             <>
-              <p>
-                <Link to={"/login"} className="text-black border-2 border-black px-4 py-1 rounded-3xl font-bold  mr-6 hover:bg-black hover:text-white">Login</Link>
-              </p>
-              <p>
-                <Link to={"/sign-up"} className=" border-2 border-black text-white bg-black px-4 py-1 rounded-3xl font-bold  mr-6 hover:bg-white hover:text-black">Sign Up</Link>
-              </p>
-            </>
+  <p className="mr-6">
+    <Link
+      to="/login"
+      className="relative text-black border-2 border-black px-6 py-2 rounded-full font-medium text-lg tracking-wide shadow-sm transition-all duration-300 overflow-hidden 
+      before:absolute before:inset-0 before:bg-black before:rounded-full before:scale-x-0 before:origin-left before:transition-transform before:duration-300 
+      hover:text-white hover:shadow-md hover:before:scale-x-100"
+    >
+      <span className="relative z-10">Login</span>
+    </Link>
+  </p>
+  <p>
+    <Link
+      to="/sign-up"
+      className="relative border-2 border-black text-white bg-black px-6 py-2 rounded-full font-medium text-lg tracking-wide shadow-sm transition-all duration-300 overflow-hidden 
+      before:absolute before:inset-0 before:bg-base-300 before:rounded-full before:scale-x-0 before:origin-left before:transition-transform before:duration-300 
+      hover:text-black hover:shadow-md hover:before:scale-x-100"
+    >
+      <span className="relative z-10">Sign Up</span>
+    </Link>
+  </p>
+</>
+
+
+
           ) : (
             <div className="flex justify-center items-center gap-4 font-bold">
               <p>

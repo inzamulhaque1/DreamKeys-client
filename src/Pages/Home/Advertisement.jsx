@@ -36,7 +36,7 @@ const Advertisement = () => {
     return (
         <div className="p-6 w-9/12 mx-auto">
             <div className="text-center mb-6">
-                <h1 className="text-4xl font-extrabold text-gray-800">Featured Advertisements</h1>
+                <h1 className="md:text-4xl font-extrabold text-gray-800">Featured Advertisements</h1>
                 <p className="text-lg text-gray-600 mt-2">Explore the latest advertised properties curated just for you!</p>
             </div>
 
