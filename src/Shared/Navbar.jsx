@@ -1,12 +1,13 @@
+/* eslint-disable react/prop-types */
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
-
-const Navbar = () => {
+import logo from '../assets/logo/DKDarkLogo.png'
+const Navbar = ({ toggleTheme, theme }) => {
   const { user, logOut } = useAuth();
   const [userRole, setUserRole] = useState(""); // To store the user role
-  const [theme, setTheme] = useState("light"); // State for theme
+  // const [theme, setTheme] = useState("light"); // State for theme
   const axiosSecure = useAxiosSecure(); // Custom Axios hook
   const navigate = useNavigate();
 
@@ -36,16 +37,10 @@ const Navbar = () => {
     }
   };
 
-  // Toggle theme
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme);
-  };
 
   const links = (
     <>
-      <li className="text-black">
+      <li className="text-black dark:text-white">
         <Link to={"/"}>Home</Link>
       </li>
       <li className="text-black">
@@ -58,8 +53,10 @@ const Navbar = () => {
   );
 
   return (
-    <div className="bg-white/70 roboto dark:bg-[#0B0716] backdrop-blur-md sticky top-0 z-50">
-      <div className="navbar w-full lg:w-9/12 mx-auto px-4 lg:px-0">
+    <div className="bg-white/70 roboto dark:bg-black backdrop-blur-md sticky top-0 z-50">
+
+
+      <div className="navbar w-full lg:w-9/12 mx-auto px-4 lg:px-0 ">
         {/* Navbar Start (Logo and Mobile Menu) */}
         <div className="navbar-start">
           {/* Mobile Dropdown Menu */}
@@ -89,7 +86,7 @@ const Navbar = () => {
           </div>
           {/* Logo */}
           <Link to="/" className="text-xl font-bold">
-            DreamKeys
+            <img className="h-[70px]" src={logo} alt="" />
           </Link>
         </div>
 

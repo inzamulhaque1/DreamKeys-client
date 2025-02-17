@@ -5,8 +5,10 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    
     extend: {},
   },
+  darkMode: "class",
   plugins: [
     // eslint-disable-next-line no-undef
     require('daisyui'),
