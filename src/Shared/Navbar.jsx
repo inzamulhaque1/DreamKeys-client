@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
-import logo from '../assets/logo/DKDarkLogo.png'
+import logoDark from '../assets/logo/DKDarkLogo.png'
+import logo from '../assets/logo/DKLogoMain.png'
 const Navbar = ({ toggleTheme, theme }) => {
   const { user, logOut } = useAuth();
   const [userRole, setUserRole] = useState(""); // To store the user role
@@ -40,28 +41,28 @@ const Navbar = ({ toggleTheme, theme }) => {
 
   const links = (
     <>
-      <li className="text-black dark:text-white">
+      <li className="text-black dark:text-white hover:bg-blue-600 rounded-xl hover:text-white">
         <Link to={"/"}>Home</Link>
       </li>
-      <li className="text-black">
+      <li className="text-black dark:text-white hover:bg-blue-600 rounded-xl hover:text-white">
         <Link to={"all-properties"}>All Properties</Link>
       </li>
-      <li className="text-black">
+      <li className="text-black dark:text-white hover:bg-blue-600 rounded-xl hover:text-white">
         <Link onClick={handleDashboardClick}>Dashboard</Link>
       </li>
     </>
   );
 
   return (
-    <div className="bg-white/70 roboto dark:bg-black backdrop-blur-md sticky top-0 z-50">
+    <div className="bg-white/70 roboto dark:bg-[#0B0716] backdrop-blur-md sticky top-0 z-50">
 
 
       <div className="navbar w-full lg:w-9/12 mx-auto px-4 lg:px-0 ">
         {/* Navbar Start (Logo and Mobile Menu) */}
         <div className="navbar-start">
           {/* Mobile Dropdown Menu */}
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <div className="dropdown ">
+            <div tabIndex={0} role="button" className="btn dark:text-white btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -79,24 +80,24 @@ const Navbar = ({ toggleTheme, theme }) => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu dark:bg-[#0B0716] menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               {links}
             </ul>
           </div>
           {/* Logo */}
           <Link to="/" className="text-xl font-bold">
-            <img className="h-[70px]" src={logo} alt="" />
+            <img className="h-[60px]" src={theme === "dark" ? logoDark : logo} alt="" />
           </Link>
         </div>
 
         {/* Navbar Center (Desktop Menu) */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{links}</ul>
+          <ul className="menu menu-horizontal px-1 ">{links}</ul>
         </div>
 
         {/* Navbar End (Theme Toggle, Login/Signup, or User Info) */}
-        <div className="navbar-end gap-4 flex items-center">
+        <div className="navbar-end gap-4 dark:text-white flex items-center">
           {/* Theme Button */}
           <label className="swap swap-rotate">
             <input
@@ -125,12 +126,12 @@ const Navbar = ({ toggleTheme, theme }) => {
           {/* Login/Signup or User Info */}
           {!user ? (
             <>
-              <p className="mr-4">
+              <p className="mr-4 ">
                 <Link
                   to="/login"
                   className="relative text-black border-2 border-black px-4 py-1 lg:px-6 lg:py-2 rounded-full font-medium text-sm lg:text-lg tracking-wide shadow-sm transition-all duration-300 overflow-hidden 
                   before:absolute before:inset-0 before:bg-black before:rounded-full before:scale-x-0 before:origin-left before:transition-transform before:duration-300 
-                  hover:text-white hover:shadow-md hover:before:scale-x-100"
+                  hover:text-white hover:shadow-md hover:before:scale-x-100 dark:text-white dark:border-white dark:hover:text-black dark:before:bg-white"
                 >
                   <span className="relative z-10">Login</span>
                 </Link>
