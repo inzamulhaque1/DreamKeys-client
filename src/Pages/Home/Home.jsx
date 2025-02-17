@@ -8,7 +8,7 @@ import Slider from "./Slider";
 
 const Home = () => {
   return (
-    <div>
+    <div className="dark:bg-[#0B0716]">
         <Hero></Hero>
         <Advertisement></Advertisement>
         <Slider></Slider>
