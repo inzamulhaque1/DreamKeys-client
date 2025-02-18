@@ -31,6 +31,7 @@ import FAQSection from "../Pages/Home/FAQSection";
 import PropertyDemandHeatmap from "../Pages/Home/PropertyDemandHeatmap";
 import PropertyValuationTool from "../Pages/Home/PropertyValuationTool";
 import LiveChat from "../Pages/Home/LiveChat";
+import AdminStats from "../Pages/Dashboard/Admin/AdminStats";
 
 
 
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
     children: [
 
       // Admin
+      {
+        path: 'admin-stats',
+        element:<AdminStats></AdminStats>
+      },
       {
         path: 'all-users',
         element:<AllUsers></AllUsers>

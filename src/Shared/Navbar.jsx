@@ -30,7 +30,7 @@ const Navbar = ({ toggleTheme, theme }) => {
   // Handle dashboard navigation
   const handleDashboardClick = () => {
     if (userRole === "admin") {
-      navigate("/dashboard/admin-profile");
+      navigate("/dashboard/admin-stats");
     } else if (userRole === "agent") {
       navigate("/dashboard/agent-profile");
     } else {
