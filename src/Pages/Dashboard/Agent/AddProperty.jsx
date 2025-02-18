@@ -115,7 +115,7 @@ const AddProperty = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white dark:bg-gray-900 shadow-lg rounded-lg">
-  <h2 className="text-3xl font-semibold mb-6 text-center text-gray-900 dark:text-white">
+  <h2 className="text-3xl font-semibold mb-6 text-center text-gray-900 dark:text-white mt-6">
     Add New Property
   </h2>
   <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
