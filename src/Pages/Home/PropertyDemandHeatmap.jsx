@@ -60,8 +60,6 @@ const PropertyDemandHeatmap = () => {
     }
   ]);
 
-
-
   const getPropertyIcon = (type) => {
     switch(type) {
       case 'commercial':
@@ -76,7 +74,7 @@ const PropertyDemandHeatmap = () => {
   };
 
   return (
-    <div className="w-9/12 mx-auto py-10 md:my-10 bg-gray-50 dark:bg-[#0B0716]  overflow-hidden transition-all duration-300">
+    <div className="w-full max-w-screen-xl mx-auto py-10 px-4 md:px-6 lg:px-8 bg-gray-50 dark:bg-[#0B0716] overflow-hidden transition-all duration-300">
       {/* Header */}
       <div className="p-6 border-b border-gray-200 dark:border-gray-800">
         <div className="flex items-center justify-between">
@@ -85,8 +83,8 @@ const PropertyDemandHeatmap = () => {
               <Building2 className="h-6 w-6 text-blue-500" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Property Demand Heatmap</h2>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Real-time market analysis</p>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white exo2">Property Demand Heatmap</h2>
+              <p className="text-sm md:text-base text-gray-500 dark:text-gray-400">Real-time market analysis</p>
             </div>
           </div>
           <div className="flex items-center gap-2 px-3 py-1 bg-green-500/10 text-green-500 rounded-full">
@@ -98,18 +96,14 @@ const PropertyDemandHeatmap = () => {
 
       {/* Content */}
       <div className="p-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {demandData.map((item) => (
             <div
               key={item.area}
               className="relative group rounded-xl transition-all duration-500 hover:bg-blue-50 dark:bg-gray-800 border dark:border-white"
-              
             >
               {/* Glowing effect */}
-              <div 
-                className="absolute rounded-xl"
-                
-              />
+              <div className="absolute rounded-xl" />
               
               <div className="p-5 relative z-10">
                 <div className="flex justify-between items-start mb-4">
@@ -118,7 +112,7 @@ const PropertyDemandHeatmap = () => {
                       {getPropertyIcon(item.type)}
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-gray-800 dark:text-white">{item.area}</h3>
+                      <h3 className="font-bold text-lg md:text-xl text-gray-800 dark:text-white">{item.area}</h3>
                       <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
                         <MapPin className="h-3 w-3" />
                         {item.location}
@@ -171,20 +165,22 @@ const PropertyDemandHeatmap = () => {
         </div>
 
         {/* Legend */}
-        <div className="mt-8 flex items-center justify-center space-x-6 border-t border-gray-200 dark:border-gray-800 pt-6">
-          <div className="flex items-center px-3 py-1.5 bg-blue-500/5 rounded-lg">
-            <div className="w-4 h-4 rounded mr-2 bg-blue-500/30"></div>
-            <span className="text-sm text-gray-600 dark:text-gray-400">Low Demand</span>
-          </div>
-          <div className="flex items-center px-3 py-1.5 bg-blue-500/5 rounded-lg">
-            <div className="w-4 h-4 rounded mr-2 bg-blue-500/60"></div>
-            <span className="text-sm text-gray-600 dark:text-gray-400">Medium Demand</span>
-          </div>
-          <div className="flex items-center px-3 py-1.5 bg-blue-500/5 rounded-lg">
-            <div className="w-4 h-4 rounded mr-2 bg-blue-500"></div>
-            <span className="text-sm text-gray-600 dark:text-gray-400">High Demand</span>
-          </div>
-        </div>
+<div className="mt-8 flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 border-t border-gray-200 dark:border-gray-800 pt-6">
+  <div className="flex items-center px-3 py-1.5 bg-blue-500/5 rounded-lg">
+    <div className="w-4 h-4 rounded mr-2 bg-blue-500/30"></div>
+    <span className="text-sm sm:text-base text-gray-600 dark:text-gray-400">Low Demand</span>
+  </div>
+  <div className="flex items-center px-3 py-1.5 bg-blue-500/5 rounded-lg">
+    <div className="w-4 h-4 rounded mr-2 bg-blue-500/60"></div>
+    <span className="text-sm sm:text-base text-gray-600 dark:text-gray-400">Medium Demand</span>
+  </div>
+  <div className="flex items-center px-3 py-1.5 bg-blue-500/5 rounded-lg">
+    <div className="w-4 h-4 rounded mr-2 bg-blue-500"></div>
+    <span className="text-sm sm:text-base text-gray-600 dark:text-gray-400">High Demand</span>
+  </div>
+</div>
+
+
       </div>
     </div>
   );

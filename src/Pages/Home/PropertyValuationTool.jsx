@@ -4,7 +4,6 @@ import {
   TrendingUp,
   Building2,
   ArrowRight,
-  
 } from 'lucide-react';
 
 const PropertyValuationTool = () => {
@@ -60,15 +59,15 @@ const PropertyValuationTool = () => {
   };
 
   return (
-    <div className="w-9/12 mx-auto py-10 md:my-10 bg-gray-50 dark:bg-[#0B0716]  overflow-hidden transition-all duration-300">
+    <div className="w-full md:w-9/12 mx-auto py-10 md:my-10 bg-gray-50 dark:bg-[#0B0716] overflow-hidden transition-all duration-300">
       {/* Header */}
-      <div className="p-6 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-[#0D0A1F]">
+      <div className="p-6 border-b border-gray-200 dark:border-gray-800  dark:bg-[#0D0A1F]">
         <div className="flex items-center gap-3">
           <div className="bg-blue-500/10 p-2 rounded-lg">
             <Building2 className="h-6 w-6 text-blue-500" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-gray-800 dark:text-white">AI Property Valuation</h2>
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white exo2">AI Property Valuation</h2>
             <p className="text-sm text-gray-500 dark:text-gray-400">Get an instant AI-powered property valuation</p>
           </div>
         </div>
@@ -191,7 +190,7 @@ const PropertyValuationTool = () => {
               {/* Market Trends */}
               <div className="p-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
                 <h3 className="text-lg font-medium text-gray-800 dark:text-white mb-4">Market Insights</h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <div className="text-sm text-gray-500 dark:text-gray-400">Price Trend</div>
                     <div className="text-base font-medium text-gray-900 dark:text-white flex items-center gap-1">
