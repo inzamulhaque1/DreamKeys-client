@@ -58,10 +58,10 @@ const LatestReviews = ({ propertyId }) => {
     }
 
     return (
-        <div className="reviews-container w-9/12 mx-auto py-12 px-4 bg-gray-50 dark:bg-[#0B0716]">
+        <div className="reviews-container w-9/12 mx-auto md:py-24 px-4 bg-gray-50 dark:bg-[#0B0716]">
             {/* Title and Subtitle */}
             <div className="text-center mb-10">
-                <h2 className="exo2 text-4xl font-bold text-gray-800 dark:text-white mb-4">
+                <h2 className="exo2 text-4xl font-bold text-blue-800 dark:text-white mb-4">
                     What Our Clients Say
                 </h2>
                 <p className="libre text-lg text-gray-600 dark:text-gray-300">
@@ -78,7 +78,7 @@ const LatestReviews = ({ propertyId }) => {
                     {reviews.map((review) => (
                         <div
                             key={review._id}
-                            className="review-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 transform"
+                            className="review-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-200 hover:border-blue-500  dark:border-gray-700 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 transform"
                         >
                             {/* User Info Section */}
                             <div className="review-header flex items-center space-x-4 mb-4">

@@ -1,14 +1,10 @@
-import  { useState } from "react";
+import { useState } from "react";
 
 const FAQSection = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleAnswer = (index) => {
-    if (activeIndex === index) {
-      setActiveIndex(null); // Close the answer if it's already open
-    } else {
-      setActiveIndex(index); // Open the answer
-    }
+    setActiveIndex(activeIndex === index ? null : index);
   };
 
   const faqData = [
@@ -35,25 +31,42 @@ const FAQSection = () => {
   ];
 
   return (
-    <section className="bg-gray-100 py-8">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-semibold text-center mb-8">Frequently Asked Questions</h2>
-        <div className="space-y-4">
+    <section className="bg-gray-100 dark:bg-[#0B0716] py-16">
+      <div className="container mx-auto px-4 md:px-8 lg:px-16">
+        {/* Heading & Subheading */}
+        <div className="text-center mb-12">
+          <h2 className="exo2 text-4xl font-bold text-blue-800 dark:text-white mb-4">
+            Your Questions, Answered
+          </h2>
+          <p className="libre text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            Find answers to commonly asked questions about our properties, financing options, and services.
+          </p>
+        </div>
+
+        {/* FAQ Items */}
+        <div className="space-y-6 max-w-2xl mx-auto">
           {faqData.map((item, index) => (
-            <div key={index} className="border-b border-gray-300">
+            <div
+              key={index}
+              className="border-b border-gray-300 dark:border-gray-600"
+            >
               <button
-                className="w-full text-left text-xl font-medium text-gray-800 py-4"
+                className="w-full text-left text-lg font-medium text-blue-800 dark:text-gray-200 py-4 flex justify-between items-center"
                 onClick={() => toggleAnswer(index)}
               >
-                <span className="flex justify-between items-center">
-                  {item.question}
-                  <span className={`transform ${activeIndex === index ? "rotate-180" : ""}`}>
-                    &#9660;
-                  </span>
+                {item.question}
+                <span
+                  className={`transform transition-transform duration-300 ${
+                    activeIndex === index ? "rotate-180" : ""
+                  }`}
+                >
+                  &#9660;
                 </span>
               </button>
               {activeIndex === index && (
-                <div className="px-4 py-2 text-gray-600">{item.answer}</div>
+                <div className="px-4 py-2 text-gray-600 dark:text-gray-400">
+                  {item.answer}
+                </div>
               )}
             </div>
           ))}
