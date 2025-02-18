@@ -58,7 +58,7 @@ const LatestReviews = ({ propertyId }) => {
     }
 
     return (
-        <div className="reviews-container w-9/12 mx-auto md:py-24 px-4 bg-gray-50 dark:bg-[#0B0716]">
+        <div className="reviews-container w-11/12 md:w-9/12 mx-auto md:py-24 px-4 bg-gray-50 dark:bg-[#0B0716]">
             {/* Title and Subtitle */}
             <div className="text-center mb-10">
                 <h2 className="exo2 text-4xl font-bold text-blue-800 dark:text-white mb-4">
