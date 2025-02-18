@@ -421,7 +421,7 @@ const Dashboard = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 bg-gray-100 overflow-y-auto h-full">
+        <div className="flex-1 bg-gray-100 overflow-y-auto h-full dark:bg-[#0B0716] p-4">
           <Outlet context={{ theme, toggleTheme }} />
         </div>
       </div>
