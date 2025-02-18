@@ -32,6 +32,7 @@ import PropertyDemandHeatmap from "../Pages/Home/PropertyDemandHeatmap";
 import PropertyValuationTool from "../Pages/Home/PropertyValuationTool";
 import LiveChat from "../Pages/Home/LiveChat";
 import AdminStats from "../Pages/Dashboard/Admin/AdminStats";
+import UserStats from "../Pages/Dashboard/User/UserStats";
 
 
 
@@ -164,6 +165,10 @@ const router = createBrowserRouter([
       {
         path: 'payment/:id',
         element: <Payment></Payment>
+      },
+      {
+        path: 'user-stats',
+        element: <UserStats></UserStats>
       },
       
     ]

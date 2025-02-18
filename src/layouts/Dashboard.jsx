@@ -351,6 +351,18 @@ const Dashboard = () => {
                 {userRole === "user" && (
                   <>
                     <NavLink
+                      to={"user-stats"}
+                      className={({ isActive }) =>
+                        `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
+                          isActive
+                            ? "text-white font-bold border-white border-2 bg-red-500"
+                            : "text-white"
+                        }`
+                      }
+                    >
+                     My Stats
+                    </NavLink>
+                    <NavLink
                       to={"my-profile"}
                       className={({ isActive }) =>
                         `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${

@@ -34,7 +34,7 @@ const Navbar = ({ toggleTheme, theme }) => {
     } else if (userRole === "agent") {
       navigate("/dashboard/selling-statistics");
     } else {
-      navigate("/dashboard/my-profile");
+      navigate("/dashboard/user-stats");
     }
   };
 
