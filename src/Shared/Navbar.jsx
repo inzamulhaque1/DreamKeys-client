@@ -32,7 +32,7 @@ const Navbar = ({ toggleTheme, theme }) => {
     if (userRole === "admin") {
       navigate("/dashboard/admin-stats");
     } else if (userRole === "agent") {
-      navigate("/dashboard/agent-profile");
+      navigate("/dashboard/selling-statistics");
     } else {
       navigate("/dashboard/my-profile");
     }

@@ -271,6 +271,18 @@ const Dashboard = () => {
                 {/* Agent Buttons */}
                 {userRole === "agent" && (
                   <>
+                  <NavLink
+                      to={"selling-statistics"}
+                      className={({ isActive }) =>
+                        `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
+                          isActive
+                            ? "text-white font-bold border-white border-2 bg-red-500"
+                            : "text-white"
+                        }`
+                      }
+                    >
+                      Statistics
+                    </NavLink>
                     <NavLink
                       to={"agent-profile"}
                       className={({ isActive }) =>
@@ -331,18 +343,7 @@ const Dashboard = () => {
                     >
                       My Sold Property
                     </NavLink>
-                    <NavLink
-                      to={"selling-statistics"}
-                      className={({ isActive }) =>
-                        `mb-2 flex items-center hover:bg-blue-600 p-2 rounded ${
-                          isActive
-                            ? "text-white font-bold border-white border-2 bg-red-500"
-                            : "text-white"
-                        }`
-                      }
-                    >
-                      Statistics
-                    </NavLink>
+                    
                   </>
                 )}
 
