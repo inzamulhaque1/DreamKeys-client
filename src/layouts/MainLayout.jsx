@@ -27,10 +27,10 @@ const MainLayout = () => {
 
 
     return (
-        <div>
+        <div className="bg-gray-50 dark:bg-[#0B0716] ">
             <Navbar toggleTheme={toggleTheme} theme={theme} ></Navbar>
             <Outlet context={{ theme, toggleTheme }}></Outlet>
-            <Footer></Footer>
+            <Footer theme={theme} ></Footer>
         </div>
     );
 };

@@ -2,7 +2,6 @@ import useAuth from "../../../hooks/useAuth";
 
 const AdminProfile = () => {
   const { user } = useAuth();
-  
 
   // Format date to local time
   const formatDateToLocalTime = (utcDate) => {
@@ -23,19 +22,20 @@ const AdminProfile = () => {
     joinedDate: formatDateToLocalTime(user?.metadata?.creationTime),
     lastLogin: formatDateToLocalTime(user?.metadata?.lastSignInTime),
   };
+
   return (
     <div
-      className="relative h-full bg-cover bg-center text-white"
+      className="relative h-full bg-cover bg-center text-white dark:bg-[#0B0716]"
       style={{
         backgroundImage:
           "url('https://i.pinimg.com/originals/ca/4d/23/ca4d2391455ade48053c0b6861842574.gif')",
       }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+      <div className="absolute inset-0 bg-black bg-opacity-30 dark:bg-opacity-50"></div>
 
       {/* Content */}
-      <div className="relative z-10 flex justify-center items-center h-full">
+      <div className="relative z-10 flex justify-center items-center h-full px-4">
         {/* Profile Card */}
         <div
           className="w-full max-w-md backdrop-blur-lg bg-white bg-opacity-20 rounded-xl shadow-lg p-6"
@@ -57,10 +57,10 @@ const AdminProfile = () => {
 
           {/* User Information */}
           <div className="text-center mt-6">
-            <h2 className="text-3xl font-bold text-white">
+            <h2 className="text-3xl font-bold text-white dark:text-white">
               {user?.displayName || "User"}
             </h2>
-            <p className="text-sm text-gray-300">{userInfo.email}</p>
+            <p className="text-sm text-gray-300 dark:text-gray-400">{userInfo.email}</p>
             {userInfo.role && (
               <span className="inline-block mt-2 px-4 py-1 text-sm font-medium text-white bg-green-600 rounded-full shadow-md">
                 {userInfo.role}
@@ -69,7 +69,7 @@ const AdminProfile = () => {
           </div>
 
           {/* Additional Information */}
-          <div className="mt-6 text-white">
+          <div className="mt-6 text-white dark:text-gray-200">
             <h3 className="text-lg font-semibold border-b border-gray-300 pb-2">
               Additional Information
             </h3>
@@ -85,9 +85,6 @@ const AdminProfile = () => {
               </li>
             </ul>
           </div>
-
-          
-       
         </div>
       </div>
     </div>

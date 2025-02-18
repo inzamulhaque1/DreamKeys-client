@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
-import logoDark from '../assets/logo/DKDarkLogo.png'
-import logo from '../assets/logo/DKLogoMain.png'
+import logoDark from "../assets/logo/DKDarkLogo.png";
+import logo from "../assets/logo/DKLogoMain.png";
 const Navbar = ({ toggleTheme, theme }) => {
   const { user, logOut } = useAuth();
   const [userRole, setUserRole] = useState(""); // To store the user role
@@ -38,8 +38,7 @@ const Navbar = ({ toggleTheme, theme }) => {
     }
   };
 
-
-  const links = (
+  const loggedInLinks = (
     <>
       <li className="text-black  dark:text-white hover:bg-blue-600 rounded-xl hover:text-white">
         <Link to={"/"}>Home</Link>
@@ -48,21 +47,55 @@ const Navbar = ({ toggleTheme, theme }) => {
         <Link to={"all-properties"}>All Properties</Link>
       </li>
       <li className="text-black dark:text-white hover:bg-blue-600 rounded-xl hover:text-white">
+        <Link to={"Heatmap"}>Heatmap</Link>
+      </li>
+      <li className="text-black dark:text-white hover:bg-blue-600 rounded-xl hover:text-white">
+        <Link to={"Valuation"}>Valuation</Link>
+      </li>
+      <li className="text-black dark:text-white hover:bg-blue-600 rounded-xl hover:text-white">
+        <Link to={"live-Chat"}>Live Chat</Link>
+      </li>
+      <li className="text-black dark:text-white hover:bg-blue-600 rounded-xl hover:text-white">
         <Link onClick={handleDashboardClick}>Dashboard</Link>
+      </li>
+    </>
+  );
+
+  const loggedOutLinks = (
+    <>
+      <li className="text-black  dark:text-white hover:bg-blue-600 rounded-xl hover:text-white">
+        <Link to={"/"}>Home</Link>
+      </li>
+      <li className="text-black dark:text-white hover:bg-blue-600 rounded-xl hover:text-white">
+        <Link to={"all-properties"}>All Properties</Link>
+      </li>
+      <li className="text-black dark:text-white hover:bg-blue-600 rounded-xl hover:text-white">
+        <Link to={"Heatmap"}>Heatmap</Link>
+      </li>
+      <li className="text-black dark:text-white hover:bg-blue-600 rounded-xl hover:text-white">
+        <Link to={"Valuation"}>Valuation</Link>
+      </li>
+      <li className="text-black dark:text-white hover:bg-blue-600 rounded-xl hover:text-white">
+        <Link to={"live-Chat"}>Live Chat</Link>
+      </li>
+      <li className="text-black dark:text-white hover:bg-blue-600 rounded-xl hover:text-white">
+        <Link to={"faq"}>FAQ</Link>
       </li>
     </>
   );
 
   return (
     <div className="bg-white/70 roboto dark:bg-[#0B0716] backdrop-blur-md sticky top-0 z-50">
-
-
       <div className="navbar w-full lg:w-9/12 mx-auto px-4 lg:px-0 ">
         {/* Navbar Start (Logo and Mobile Menu) */}
         <div className="navbar-start">
           {/* Mobile Dropdown Menu */}
           <div className="dropdown ">
-            <div tabIndex={0} role="button" className="btn dark:text-white btn-ghost lg:hidden">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn dark:text-white btn-ghost lg:hidden"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -82,18 +115,22 @@ const Navbar = ({ toggleTheme, theme }) => {
               tabIndex={0}
               className="menu dark:bg-[#0B0716] menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-              {links}
+              {user ? loggedInLinks : loggedOutLinks}
             </ul>
           </div>
           {/* Logo */}
           <Link to="/" className="text-xl font-bold">
-            <img className="h-[60px]" src={theme === "dark" ? logoDark : logo} alt="" />
+            <img
+              className="h-[60px]"
+              src={theme === "dark" ? logoDark : logo}
+              alt=""
+            />
           </Link>
         </div>
 
         {/* Navbar Center (Desktop Menu) */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 ">{links}</ul>
+          <ul className="menu menu-horizontal px-1 ">{user ? loggedInLinks : loggedOutLinks}</ul>
         </div>
 
         {/* Navbar End (Theme Toggle, Login/Signup, or User Info) */}
@@ -160,7 +197,6 @@ const Navbar = ({ toggleTheme, theme }) => {
             </div>
           )}
         </div>
-
       </div>
     </div>
   );

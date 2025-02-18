@@ -27,6 +27,10 @@ import AdvertiseProperty from "../Pages/Dashboard/Admin/AdvertiseProperty";
 import Payment from "../Pages/Payment/Payment";
 import SellingStatistics from "../Pages/Dashboard/Agent/SellingStatistics";
 import ErrorPage from "../Pages/Error/ErrorPage";
+import FAQSection from "../Pages/Home/FAQSection";
+import PropertyDemandHeatmap from "../Pages/Home/PropertyDemandHeatmap";
+import PropertyValuationTool from "../Pages/Home/PropertyValuationTool";
+import LiveChat from "../Pages/Home/LiveChat";
 
 
 
@@ -55,6 +59,22 @@ const router = createBrowserRouter([
       {
         path: "sign-up",
         element: <SIgnUp></SIgnUp>,
+      },
+      {
+        path: "faq",
+        element: <FAQSection></FAQSection>,
+      },
+      {
+        path: "Heatmap",
+        element: <PropertyDemandHeatmap></PropertyDemandHeatmap>,
+      },
+      {
+        path: "Valuation",
+        element:<PropertyValuationTool></PropertyValuationTool>
+      },
+      {
+        path: "live-Chat",
+        element:<LiveChat></LiveChat>
       },
 
     ],

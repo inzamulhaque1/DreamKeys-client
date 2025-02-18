@@ -54,27 +54,27 @@ const ManageProperties = () => {
     
 
     return (
-        <div>
-            <h1 className="text-2xl font-bold mb-4">Manage Properties</h1>
+        <div className="min-h-screen bg-gray-100 dark:bg-[#0B0716] p-4">
+            <h1 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Manage Properties</h1>
             <table className="min-w-full border-collapse table-auto">
-                <thead>
+                <thead className="bg-gray-200 dark:bg-gray-800">
                     <tr>
-                        <th className="border p-2">Property Title</th>
-                        <th className="border p-2">Location</th>
-                        <th className="border p-2">Agent Name</th>
-                        <th className="border p-2">Agent Email</th>
-                        <th className="border p-2">Price Range</th>
-                        <th className="border p-2">Action</th>
+                        <th className="border p-2 text-left text-gray-700 dark:text-white">Property Title</th>
+                        <th className="border p-2 text-left text-gray-700 dark:text-white">Location</th>
+                        <th className="border p-2 text-left text-gray-700 dark:text-white">Agent Name</th>
+                        <th className="border p-2 text-left text-gray-700 dark:text-white">Agent Email</th>
+                        <th className="border p-2 text-left text-gray-700 dark:text-white">Price Range</th>
+                        <th className="border p-2 text-left text-gray-700 dark:text-white">Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="bg-white dark:bg-gray-900">
                     {properties.map((property) => (
                         <tr key={property._id}>
-                            <td className="border p-2">{property.title}</td>
-                            <td className="border p-2">{property.location}</td>
-                            <td className="border p-2">{property.agentName}</td>
-                            <td className="border p-2">{property.agentEmail}</td>
-                            <td className="border p-2">
+                            <td className="border p-2 text-gray-800 dark:text-white">{property.title}</td>
+                            <td className="border p-2 text-gray-800 dark:text-white">{property.location}</td>
+                            <td className="border p-2 text-gray-800 dark:text-white">{property.agentName}</td>
+                            <td className="border p-2 text-gray-800 dark:text-white">{property.agentEmail}</td>
+                            <td className="border p-2 text-gray-800 dark:text-white">
                                 ${property.priceRange.min} - ${property.priceRange.max}
                             </td>
                             <td className="border p-2">

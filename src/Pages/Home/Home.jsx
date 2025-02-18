@@ -23,8 +23,8 @@ const Home = () => {
         <PropertyValuationTool></PropertyValuationTool>
         <BlogSection></BlogSection>
         <GamifiedReferral></GamifiedReferral>
-        <FAQSection></FAQSection>
         <LiveChat></LiveChat>
+        <FAQSection></FAQSection>
         
        
       
